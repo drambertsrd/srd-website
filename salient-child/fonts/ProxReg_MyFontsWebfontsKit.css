@@ -1,0 +1,58 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3333078, 2017-01-18T09:22:01-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * 
+ * 
+ * Webfont: ProximaNovaA-Regular by Mark Simonson
+ * URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova/a-regular/
+ * 
+ * Webfont: ProximaNovaS-Regular by Mark Simonson
+ * URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova/s-regular/
+ * 
+ * Webfont: ProximaNova-Regular by Mark Simonson
+ * URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova/regular/
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=3333078
+ * Licensed pageviews: 1,000,000
+ * Webfonts copyright: Copyright (c) Mark Simonson, 2005. All rights reserved.
+ * 
+ * © 2017 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/32dbd6");
+  
+@font-face {font-family: 'ProximaNovaA-Regular';src: url('fonts/32DBD6_D_0.eot');src: url('fonts/32DBD6_D_0.eot?#iefix') format('embedded-opentype'),url('fonts/32DBD6_D_0.woff2') format('woff2'),url('fonts/32DBD6_D_0.woff') format('woff'),url('fonts/32DBD6_D_0.ttf') format('truetype');}
+ 
+
+@font-face {font-family: 'ProximaNovaS-Regular';src: url('fonts/32DBD6_10_0.eot');src: url('fonts/32DBD6_10_0.eot?#iefix') format('embedded-opentype'),url('fonts/32DBD6_10_0.woff2') format('woff2'),url('fonts/32DBD6_10_0.woff') format('woff'),url('fonts/32DBD6_10_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'ProximaNova-Regular';src: url('fonts/32DBD6_11_0.eot');src: url('fonts/32DBD6_11_0.eot?#iefix') format('embedded-opentype'),url('fonts/32DBD6_11_0.woff2') format('woff2'),url('fonts/32DBD6_11_0.woff') format('woff'),url('fonts/32DBD6_11_0.ttf') format('truetype');}
+
+.ProximaNovaA-Regular { 
+	font-family: ProximaNovaA-Regular;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.ProximaNovaS-Regular { 
+	font-family: ProximaNovaS-Regular;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.ProximaNova-Regular { 
+	font-family: ProximaNova-Regular;
+	font-weight: normal;
+	font-style: normal;
+}
