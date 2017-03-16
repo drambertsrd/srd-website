@@ -12,7 +12,7 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 
 	//load custom fonts
 	if(!empty($current_options)) {
-		$font_fields = array('navigation_font_family','navigation_dropdown_font_family','page_heading_font_family','page_heading_subtitle_font_family','off_canvas_nav_font_family','off_canvas_nav_subtext_font_family','body_font_family','h1_font_family','h2_font_family','h3_font_family','h4_font_family','h5_font_family','h6_font_family','i_font_family','label_font_family','nectar_slider_heading_font_family','home_slider_caption_font_family','testimonial_font_family','sidebar_footer_h_font_family','team_member_h_font_family','nectar_dropcap_font_family');
+		$font_fields = array('navigation_font_family','navigation_dropdown_font_family','portfolio_filters_font_family','page_heading_font_family','page_heading_subtitle_font_family','off_canvas_nav_font_family','off_canvas_nav_subtext_font_family','body_font_family','h1_font_family','h2_font_family','h3_font_family','h4_font_family','h5_font_family','h6_font_family','i_font_family','label_font_family','nectar_slider_heading_font_family','home_slider_caption_font_family','testimonial_font_family','sidebar_footer_h_font_family','team_member_h_font_family','nectar_dropcap_font_family');
 		
 		//legacy formatting
 		foreach($font_fields as $k => $v) { 
@@ -381,7 +381,7 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 	( intval( substr($options['h3_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['h3_font_size'],0,-2)) +8 .'px' : $line_height = null ;  ?>
 	
 	<?php echo 'body h3, .row .col h3, .toggle h3 a, .ascend #respond h3, .ascend h3#comments, .woocommerce ul.products li.product.text_on_hover h3, 
-	.masonry.classic_enhanced .masonry-blog-item h3.title 
+	.masonry.classic_enhanced .masonry-blog-item h3.title, .woocommerce ul.products li.product.material h3, .woocommerce-page ul.products li.product.material h3
 	{'; ?>	
 		<?php if($options['h3_font'] != '-') {
 			  $font_family = (1 === preg_match('~[0-9]~', $options['h3_font'])) ? '"'. $options['h3_font'] .'"' : $options['h3_font'];
@@ -503,6 +503,12 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 		.portfolio-items[data-ps="6"] .wide_tall .work-meta h4 {
 			font-size: <?php if(!empty($options['h4_font_size']) && $options['h4_font_size'] != '-') echo $options['h4_font_size']*1.7 . 'px!important' ?>;
 			line-height: <?php if(!empty($options['h4_font_size']) && $options['h4_font_size'] != '-') echo ($options['h4_font_size']*1.7) +8 . 'px!important' ?>;
+		}
+
+		.nectar-slide-in-cart .widget_shopping_cart .cart_list .mini_cart_item > a:not(.remove) {
+			<?php if($options['h4_font'] != '-') echo 'font-family: ' . $font_family .'!important;'; 
+			if(!empty($styles[0]) && $styles[0] == 'regular') $styles[0] = '400';
+		    if(!empty($styles[0]) && strpos($styles[0],'italic') === false) { echo 'font-weight:' .  $styles[0] .'!important;'; } ?>
 		}
 
 	}
@@ -631,7 +637,8 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 	( intval( substr($options['i_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['i_font_size'],0,-2)) +10 .'px' : $line_height = null ;  ?>
 	
 	<?php echo 'body i, body em, .masonry.meta_overlaid article.post .post-header .meta-author > span, #post-area.masonry.meta_overlaid article.post .post-meta .date,
-	#post-area.masonry.meta_overlaid article.post.quote .quote-inner .author, #post-area.masonry.meta_overlaid  article.post.link .post-content .destination
+	#post-area.masonry.meta_overlaid article.post.quote .quote-inner .author, #post-area.masonry.meta_overlaid  article.post.link .post-content .destination,
+	body .testimonial_slider[data-style="minimal"] blockquote span.title
 	{'; ?>	
 		<?php if($options['i_font'] != '-') {
 			  $font_family = (1 === preg_match('~[0-9]~', $options['i_font'])) ? '"'. $options['i_font'] .'"' : $options['i_font'];
@@ -682,7 +689,7 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 	( intval( substr($options['label_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['label_font_size'],0,-2)) +10 .'px' : $line_height = null ;  ?>
 	
 	<?php echo 'form label, .woocommerce-checkout-review-order-table .product-info .amount, .woocommerce-checkout-review-order-table .product-info .product-quantity,
-	.nectar-progress-bar p, .nectar-progress-bar span strong i, .nectar-progress-bar span strong, .testimonial_slider blockquote span
+	.nectar-progress-bar p, .nectar-progress-bar span strong i, .nectar-progress-bar span strong, .testimonial_slider:not([data-style="minimal"]) blockquote span, .woocommerce-ordering .select2-container .select2-choice>.select2-chosen
 	{'; ?>	
 		<?php if($options['label_font'] != '-') {
 			  $font_family = (1 === preg_match('~[0-9]~', $options['label_font'])) ? '"'. $options['label_font'] .'"' : $options['label_font'];
@@ -722,6 +729,60 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 		?>
 		<?php if(!empty($styles[1])) echo 'font-style:' . $styles[1]; ?>
 	<?php echo '}'; ?>
+
+
+
+
+	<?php 
+	/*-------------------------------------------------------------------------*/
+	/*	Portfolio Filter Font
+	/*-------------------------------------------------------------------------*/
+	$styles = explode('-', $options['portfolio_filters_font_style']);
+	
+	( intval( substr($options['portfolio_filters_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['portfolio_filters_font_size'],0,-2)) +10 .'px' : $line_height = null ;  ?>
+	
+	<?php echo '.portfolio-filters-inline .container > ul a, .portfolio-filters > ul a, .portfolio-filters > a span
+	{'; ?>	
+		<?php if($options['portfolio_filters_font'] != '-') {
+			  $font_family = (1 === preg_match('~[0-9]~', $options['portfolio_filters_font'])) ? '"'. $options['portfolio_filters_font'] .'"' : $options['portfolio_filters_font'];
+		}
+			  if($options['portfolio_filters_font'] != '-') echo 'font-family: ' . $font_family .';'; 
+			  if($options['portfolio_filters_font_transform'] != '-') echo 'text-transform: ' . $options['portfolio_filters_font_transform'] .';'; 
+			  if($options['portfolio_filters_font_spacing'] != '-') echo 'letter-spacing: ' . $options['portfolio_filters_font_spacing'] .';'; 
+		      if($options['portfolio_filters_font_size'] != '-') echo 'font-size:' . $options['portfolio_filters_font_size'] .'!important;'; ?>
+	
+		<?php 
+		//user set line-height
+		 if($options['portfolio_filters_font_line_height'] != '-') { 
+		 	echo 'line-height:' . $options['portfolio_filters_font_line_height'] .';'; 
+		 	$the_line_height = $options['portfolio_filters_font_line_height'];
+		 } else if(!empty($line_height)) {
+		//auto line-height
+			echo 'line-height:' . $line_height .';';
+			$the_line_height = $line_height;
+		} else {
+			$the_line_height = null;
+		}
+		?>
+		<?php 
+              if(!empty($styles[0]) && $styles[0] == 'regular') $styles[0] = '400';
+		      if(!empty($styles[0]) && strpos($styles[0],'italic') === false) { echo 'font-weight:' .  $styles[0] .'!important;'; }
+			  else if(!empty($styles[0]) && strpos($styles[0],'0italic') == true) {
+			  	  $the_weight = explode("i",$styles[0]);
+			  	  echo 'font-weight:' .  $the_weight[0] .';'; 
+			  	  echo 'font-style: italic';
+			  }
+			  else if(!empty($styles[0])) {
+			  	  if(strpos($styles[0],'italic') !== false) {
+			  	    echo 'font-weight: 400;'; 
+			  	    echo 'font-style: italic';
+			  	 }
+			  }
+		?>
+		<?php if(!empty($styles[1])) echo 'font-style:' . $styles[1]; ?>
+	<?php echo '}'; ?>
+
+	<?php if($the_line_height !== null) echo '.portfolio-filters-inline #current-category { line-height: '.$the_line_height.'; }'; ?>
 
 
 
@@ -915,6 +976,16 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 			font-size: <?php if(!empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] != '-') echo $options['page_heading_subtitle_font_size']*0.9 . 'px!important' ?>;
 			line-height: <?php if($the_line_height) echo ($the_line_height*0.9) . 'px!important' ?>;
 		}
+
+		<?php if(!empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] != '-' && $options['page_heading_subtitle_font_size'] > 22) { ?>
+			#page-header-bg .span_6 span.subheader {
+		  		font-size: 22px!important;
+		  	} 
+	  	<?php } else if( empty($options['page_heading_subtitle_font_size']) || !empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] == '-' ) { ?>
+		  	#page-header-bg .span_6 span.subheader {
+		  		font-size: 22px!important;
+		  	} 
+		 <?php } ?>
 	}
 
 	@media only screen and (max-width: 690px) {
@@ -922,6 +993,16 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 			font-size: <?php if(!empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] != '-') echo $options['page_heading_subtitle_font_size']*0.7 . 'px!important' ?>;
 			line-height: <?php if($the_line_height) echo ($the_line_height*0.7) . 'px!important' ?>;
 		}
+
+		<?php if(!empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] != '-' && $options['page_heading_subtitle_font_size'] > 15) { ?>
+			#page-header-bg .span_6 span.subheader {
+		  		font-size: 15px!important;
+		  	}
+	  	<?php } else if( empty($options['page_heading_subtitle_font_size']) || !empty($options['page_heading_subtitle_font_size']) && $options['page_heading_subtitle_font_size'] == '-' ) { ?>
+	  		#page-header-bg .span_6 span.subheader {
+		  		font-size: 15px!important;
+		  	} 
+		 <?php } ?>
 	}
 
 
@@ -1229,7 +1310,7 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 	$styles = explode('-', $options['testimonial_font_style']);
 	( intval( substr($options['testimonial_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['testimonial_font_size'],0,-2)) + 19 .'px!important' : $line_height = null ;  ?>
 	
-	<?php echo '.testimonial_slider blockquote, .testimonial_slider blockquote span, blockquote
+	<?php echo '.testimonial_slider blockquote, .testimonial_slider blockquote span, .testimonial_slider[data-style="minimal"] blockquote span:not(.title), .testimonial_slider[data-style="minimal"] blockquote,  blockquote, .testimonial_slider[data-style="minimal"] .controls
 	{'; ?>	
 		<?php if($options['testimonial_font'] != '-') {
 			  $font_family = (1 === preg_match('~[0-9]~', $options['testimonial_font'])) ? '"'. $options['testimonial_font'] .'"' : $options['testimonial_font'];	
@@ -1283,10 +1364,14 @@ $external_dynamic = (!empty($options['external-dynamic-css']) && $options['exter
 	$line_height =  substr($options['sidebar_footer_h_font_size'],0,-2); ?>
 	
 	<?php echo '#footer-outer .widget h4, #sidebar h4, #call-to-action .container a, .uppercase, .nectar-button, .nectar-button.medium, .nectar-button.small, .nectar-3d-transparent-button, body .widget_calendar table th, body #footer-outer #footer-widgets .col .widget_calendar table th, .swiper-slide .button a,
-	header#top nav > ul > li.megamenu > ul > li > a, .carousel-heading h2, body .gform_wrapper .top_label .gfield_label, body .vc_pie_chart .wpb_pie_chart_heading, #infscr-loading div, #page-header-bg .author-section a, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .ascend input[type="submit"], .ascend button[type="submit"],
-	.widget h4, .text-on-hover-wrap .categories a, .text_on_hover.product .add_to_cart_button, .woocommerce-page div[data-project-style="text_on_hover"] .single_add_to_cart_button, .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.qty, .woocommerce-page #respond input#submit,
+	body:not([data-header-format="left-header"]) header#top nav > ul > li.megamenu > ul > li > a, .carousel-heading h2, body .gform_wrapper .top_label .gfield_label, body .vc_pie_chart .wpb_pie_chart_heading, #infscr-loading div, #page-header-bg .author-section a, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .ascend input[type="submit"], .ascend button[type="submit"],
+	.widget h4, .text-on-hover-wrap .categories a, .text_on_hover.product .add_to_cart_button, .woocommerce-page .single_add_to_cart_button, .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.qty, .woocommerce-page #respond input#submit,
 	.meta_overlaid article.post .post-header h2, .meta_overlaid article.post.quote .post-content h2, .meta_overlaid article.post.link .post-content h2, .meta_overlaid article.post.format-status .post-content h2, .meta_overlaid article .meta-author a, .pricing-column.highlight h3 .highlight-reason,
-	.blog-recent[data-style="minimal"] .col > span, .masonry.classic_enhanced .posts-container article .meta-category a, .nectar-recent-posts-slider .container .strong, #page-header-bg[data-post-hs="default_minimal"] .inner-wrap > a, .single .heading-title[data-header-style="default_minimal"] .meta-category a, .nectar-fancy-box .link-text
+	.blog-recent[data-style="minimal"] .col > span, .masonry.classic_enhanced .posts-container article .meta-category a, .nectar-recent-posts-slider .container .strong, #page-header-bg[data-post-hs="default_minimal"] .inner-wrap > a, .single .heading-title[data-header-style="default_minimal"] .meta-category a, .nectar-fancy-box .link-text,
+	 #post-area.standard-minimal article.post .post-meta .date a, #post-area.standard-minimal article.post .more-link span, .nectar-slide-in-cart .widget_shopping_cart .buttons a, .material.product .product-wrap .product-add-to-cart a .price .amount,  .material.product .product-wrap .product-add-to-cart a span, ul.products li.material.product  span.onsale,
+	body[data-button-style="rounded"] #pagination > a, html body #pagination > span, .woocommerce nav.woocommerce-pagination ul li a, html body nav.woocommerce-pagination ul li a, html body nav.woocommerce-pagination ul li span, .woocommerce .material.product .product-wrap .product-add-to-cart a.added_to_cart,
+	.woocommerce-page ul.products li.product.material .price, .woocommerce-page ul.products li.product.material .price ins span, body[data-form-submit="see-through-2"] input[type=submit], body[data-form-submit="see-through-2"] button[type=submit], body[data-form-submit="see-through"] input[type=submit], body[data-form-submit="see-through"] button[type=submit], 
+	 body[data-form-submit="regular"] input[type=submit] body[data-form-submit="regular"] button[type=submit], .nectar_team_member_overlay .team_member_details .title
 	{'; ?>	
 		<?php if($options['sidebar_footer_h_font'] != '-') {
 			   $font_family = (1 === preg_match('~[0-9]~', $options['sidebar_footer_h_font'])) ? '"'. $options['sidebar_footer_h_font'] .'"' : $options['sidebar_footer_h_font'];

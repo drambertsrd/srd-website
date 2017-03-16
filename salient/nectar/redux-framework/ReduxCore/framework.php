@@ -2013,7 +2013,6 @@
                     ) );
                 }
 
-
                 if ( is_null( $this->sections ) ) {
                     return;
                 }

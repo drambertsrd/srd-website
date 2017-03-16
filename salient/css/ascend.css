@@ -98,6 +98,7 @@ body .carousel-wrap[data-full-width="false"] .control-wrap {
 	height: 23px;
 	width: 10px;
 	line-height: 22px;
+	font-size: 14px;
 	cursor: pointer;
 	top: 1px!important;
 	transition: all 0.25s cubic-bezier(0.12, 0.75, 0.4, 1);
@@ -190,7 +191,7 @@ html .ascend[data-ext-responsive="true"] .carousel-heading .container .carousel-
 .ascend .carousel-next i, .ascend .carousel-prev i {
    color: #000;
    font-size: 22px;
-   line-height: 18px;
+   line-height: 17px;
    height: 20px;
    transition: all 0.25s cubic-bezier(0.12, 0.75, 0.4, 1);
    -webkit-transition: all 0.25s cubic-bezier(0.12, 0.75, 0.4, 1);
@@ -321,6 +322,11 @@ html .ascend[data-ext-responsive="true"] .carousel-heading .container .carousel-
 .ascend #header-outer[data-full-width="true"][data-cart="true"] header#top nav > ul.buttons, .ascend #header-outer[data-full-width="true"] header#top nav > ul.product_added.buttons,
 .ascend #boxed #header-outer[data-cart="true"] header#top nav > ul.buttons, .ascend #boxed #header-outer header#top nav > ul.product_added.buttons {
 	padding-right: 55px!important;
+}
+
+.ascend[data-header-search="false"][data-slide-out-widget-area="false"] #header-outer[data-full-width="true"][data-cart="true"] header#top nav > ul.buttons, .ascend[data-header-search="false"][data-slide-out-widget-area="false"] #header-outer[data-full-width="true"] header#top nav > ul.product_added.buttons,
+.ascend[data-header-search="false"][data-slide-out-widget-area="false"] #boxed #header-outer[data-cart="true"] header#top nav > ul.buttons, .ascend[data-header-search="false"][data-slide-out-widget-area="false"] #boxed #header-outer header#top nav > ul.product_added.buttons {
+	padding-right: 80px!important;
 }
 
 @media only screen and (min-width: 1000px)  {
@@ -723,7 +729,7 @@ a.pp_arrow_next {right: 30px;}
 	border-radius: 0!important;
 	width: 20px!important;
 	height: 40px!important;
-	line-height: 40px!important;
+	line-height: 39px!important;
 	font-size: 24px!important;
 	font-family: FontAwesome!important;
 	margin-top: 0!important;
@@ -745,7 +751,7 @@ a.pp_arrow_next {right: 30px;}
 .ascend a.pp_arrow_next .icon-default-style {
 	border-radius: 0!important;
 	width: 20px!important;
-	line-height: 40px!important;
+	line-height: 39px!important;
 	height: 40px!important;
 	font-size: 24px!important;
 	margin-top: 0!important;
@@ -802,7 +808,7 @@ a.pp_arrow_next {right: 30px;}
 }
 
 .mfp-arrow-left:before {
-	top: -2px;
+	top: -3px;
 	left: -1px;
 	display:block;
 	position: relative;
@@ -815,7 +821,7 @@ a.pp_arrow_next {right: 30px;}
      color: #fff;
 }
 .mfp-arrow-right:before {
-	top: -2px;
+	top: -3px;
 	right: -1px;
 	display:block;
 	transition: all 0.35s cubic-bezier(0.12, 0.75, 0.4, 1);
@@ -891,6 +897,9 @@ a.pp_arrow_next {right: 30px;}
 }
 body[data-button-style="rounded"].ascend .container-wrap input[type="submit"], body[data-button-style="rounded"].ascend .container-wrap button[type="submit"] {
 	padding: 16px 23px!important;
+}
+body[data-button-style="rounded"][data-form-submit="see-through"].ascend .container-wrap .widget_search input[type="submit"], body[data-button-style="rounded"][data-form-submit="see-through"].ascend .container-wrap .widget_search button[type="submit"] {
+	padding: 12px 23px!important;
 }
 
 .ascend .woocommerce .actions .button {

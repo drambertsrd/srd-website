@@ -4,8 +4,8 @@ $title = $el_class = $value = $label_value= $units = '';
 extract(shortcode_atts(array(
 	'image_url_1' => '',
 	'image_url_2' => '',
-	'bg_color' => '',
-	'bg_color_2' => '',
+	'bg_color' => '#fff',
+	'bg_color_2' => '#fff',
 	'bg_color_overlay' => '',
 	'bg_color_overlay_2' => '',
 	'min_height' => '300',
@@ -18,6 +18,7 @@ extract(shortcode_atts(array(
 	'icon_family' => 'fontawesome',
 	'icon_fontawesome' => '',
 	'icon_linea' => '',
+	'icon_iconsmind' => '',
 	'icon_steadysets' => '',
 	'icon_color' => 'accent-color',
 	'icon_size' => '60',
@@ -80,6 +81,9 @@ switch($icon_family) {
 	case 'linecons':
 		$icon = $icon_linecons;
 		break;
+	case 'iconsmind':
+			$icon = $icon_iconsmind;
+			break;
 	default:
 		$icon = '';
 		break;

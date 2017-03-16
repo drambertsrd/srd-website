@@ -53,7 +53,7 @@ if(!empty($options['single_product_gallery_type']) && $options['single_product_g
 						if (!$img_link)
 							continue;
 
-						printf( '<div class="slide"><div class="easyzoom"><a href="%s" title="%s"> %s </a></div></div>', wp_get_attachment_url($product_attach_id),get_post($product_attach_id)->post_title, wp_get_attachment_image($product_attach_id, 'shop_single'));
+						printf( '<div class="slide"><div class="easyzoom"><a href="%s" title="%s"> %s </a></div></div>', wp_get_attachment_url($product_attach_id),esc_attr( get_post($product_attach_id)->post_title ), wp_get_attachment_image($product_attach_id, 'shop_single'));
 				
 					}
 				}
@@ -63,8 +63,8 @@ if(!empty($options['single_product_gallery_type']) && $options['single_product_g
          	
     		<div class="slider_controls">
 				 <div class="nav_wrap">
-		       		 <a href="#" class="prev_slide" onclick="return false;"><span class="icon-angle-left"></span></a>
-		       		 <a href="#" class="next_slide" onclick="return false;"><span class="icon-angle-right"></span></a>
+		       		 <a href="#" class="prev_slide" onclick="return false;"><span class="fa fa-angle-left"></span></a>
+		       		 <a href="#" class="next_slide" onclick="return false;"><span class="fa fa-angle-right"></span></a>
 		        </div>
        		</div>
 		</div>

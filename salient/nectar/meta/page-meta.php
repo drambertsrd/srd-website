@@ -84,6 +84,13 @@ function nectar_metabox_page(){
 					'type' => 'checkbox',
 	                'std' => '0'
 				),
+				array(
+					'name' =>  __('Disable On Mobile', NECTAR_THEME_NAME),
+					'desc' => __('Check this to disable the page full screen rows when viewing on a mobile device.', NECTAR_THEME_NAME),
+					'id' => '_nectar_full_screen_rows_mobile_disable',
+					'type' => 'checkbox',
+	                'std' => '0'
+				),
 				array( 
 					'name' => __('Row BG Image Animation', NECTAR_THEME_NAME),
 					'desc' => __('Select your desired row BG image animation', NECTAR_THEME_NAME),

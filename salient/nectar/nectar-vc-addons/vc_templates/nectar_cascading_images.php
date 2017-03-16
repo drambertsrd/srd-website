@@ -40,11 +40,12 @@ $cascading_attrs = shortcode_atts(array(
   "image_4_rotate_sign" => "+",
   "image_4_rotate" => "none",
   "image_4_animation" => "Fade In",
-  "image_4_box_shadow" => "none"
+  "image_4_box_shadow" => "none",
+  "animation_timing" => '175'
 ),
 $atts);
 
-echo '<div class="nectar_cascading_images">';
+echo '<div class="nectar_cascading_images" data-animation-timing="'.$cascading_attrs['animation_timing'].'">';
 
 //find largest transform val
 
@@ -127,7 +128,7 @@ for($i=1;$i<5;$i++){
 	$bg_color_markup = ($data_has_bg_color == 'true') ? '<div class="bg-color" style=" -webkit-transform:'.$transform_string.';  -ms-transform:'.$transform_string.';  transform: '.$transform_string.'; background-color: '.$cascading_attrs['image_'.$i.'_bg_color'].';" data-has-bg-color="'.$data_has_bg_color.'"></div>' : null;
 	
 	if(!empty($image_url) || $data_has_bg_color == 'true') {
-		echo '<div class="cascading-image" data-has-img="'.$data_has_bg_img.'" style=" padding:'.$transform_arr .'%;" data-animation="'.strtolower($parsed_animation).'" data-shadow="'.$cascading_attrs['image_'.$i.'_box_shadow'].'"><span class="inner-wrap">'.$bg_color_markup . $img_markup.'</span></div>';
+		echo '<div class="cascading-image" data-has-img="'.$data_has_bg_img.'" style=" padding:'.$transform_arr .'%;" data-animation="'.strtolower($parsed_animation).'" data-shadow="'.$cascading_attrs['image_'.$i.'_box_shadow'].'"><div class="inner-wrap">'.$bg_color_markup . $img_markup.'</div></div>';
 	}
 }
 

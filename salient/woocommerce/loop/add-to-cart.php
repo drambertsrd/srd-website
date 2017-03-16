@@ -21,6 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
+$options = get_nectar_theme_options(); 
+$product_style = (!empty($options['product_style'])) ? $options['product_style'] : 'classic';
+
+if($product_style != 'material') {
 echo apply_filters( 'woocommerce_loop_add_to_cart_link',
 	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s add_to_cart_button">%s</a>',
 		esc_url( $product->add_to_cart_url() ),
@@ -31,3 +35,18 @@ echo apply_filters( 'woocommerce_loop_add_to_cart_link',
 		esc_html( $product->add_to_cart_text() )
 	),
 $product );
+
+} else {
+	$price_markup = ($product->is_type( 'simple' )) ? '<span class="price">'.$product->get_price_html().'</span>' : '';
+	echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s add_to_cart_button">%s</a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+		esc_attr( $product->id ),
+		esc_attr( $product->get_sku() ),
+		esc_attr( isset( $class ) ? $class : 'button' ),
+		$price_markup.'<span class="text">'.esc_html( $product->add_to_cart_text() ).'</span>'
+	),
+$product );
+
+}

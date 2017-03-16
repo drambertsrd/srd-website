@@ -46,9 +46,9 @@ function nectar_register_js() {
 		wp_register_script('nectar_prettyPhoto', get_template_directory_uri() . '/js/prettyPhoto.js', 'jquery', '7.0.1', TRUE);
 		wp_register_script('magnific', get_template_directory_uri() . '/js/magnific.js', 'jquery', '7.0.1', TRUE);
 		wp_register_script('nectar_parallax', get_template_directory_uri() . '/js/parallax.js', 'jquery', '1.0', TRUE);
-		wp_register_script('isotope', get_template_directory_uri() . '/js/isotope.min.js', 'jquery', '7.5' ,TRUE);
+		wp_register_script('isotope', get_template_directory_uri() . '/js/isotope.min.js', 'jquery', '7.6' ,TRUE);
 		wp_register_script('select2', get_template_directory_uri() . '/js/select2.min.js', 'jquery', '3.5.2' ,TRUE);
-		wp_register_script('nectarSlider', get_template_directory_uri() . '/js/nectar-slider.js', 'jquery', '7.5', TRUE);
+		wp_register_script('nectarSlider', get_template_directory_uri() . '/js/nectar-slider.js', 'jquery', '7.6', TRUE);
 		wp_register_script('iosSlider', get_template_directory_uri() . '/js/jquery.iosslider.min.js', 'jquery', '7.5', TRUE);
 		wp_register_script('fullPage', get_template_directory_uri() . '/js/jquery.fullPage.min.js', 'jquery', '7.0.1', TRUE);
 		wp_register_script('vivus', get_template_directory_uri() . '/js/vivus.min.js', 'jquery', '6.0.1', TRUE);
@@ -63,7 +63,7 @@ function nectar_register_js() {
 		if ( floatval(get_bloginfo('version')) < "3.6" ) {
 			wp_register_script('jplayer', $nectar_get_template_directory_uri . '/js/jplayer.min.js', 'jquery', '2.1', TRUE);
 		}
-		wp_register_script('nectarFrontend', get_template_directory_uri() . '/js/init.js', array('jquery', 'superfish'), '7.5.02', TRUE);
+		wp_register_script('nectarFrontend', get_template_directory_uri() . '/js/init.js', array('jquery', 'superfish'), '7.6', TRUE);
 		
 		// Dequeue
 		$lightbox_script = (!empty($options['lightbox_script'])) ? $options['lightbox_script'] : 'pretty_photo';
@@ -209,7 +209,7 @@ function nectar_page_specific_js() {
 	}
 	
 	
-	//nectarSlider mediaElement 
+	//nectarSlider 
 	if(stripos( $post_content, '[nectar_slider') !== FALSE || stripos( $portfolio_extra_content, '[nectar_slider') !== FALSE
 	|| stripos($post_content, 'type="nectarslider_style"') !== FALSE || stripos( $portfolio_extra_content, 'type="nectarslider_style"') !== FALSE) {
 		
@@ -221,7 +221,7 @@ function nectar_page_specific_js() {
 	
 	if(stripos($post_content, '[testimonial_slider') !== FALSE || stripos( $portfolio_extra_content, '[testimonial_slider') !== FALSE
 	|| stripos($post_content, "[testimonial_slider") !== FALSE || stripos( $portfolio_extra_content, "[testimonial_slider") !== FALSE
-	|| $box_roll == 'on') {	
+	|| $box_roll == 'on' || stripos($post_content, '[nectar_portfolio') !== FALSE  ) {	
 		wp_enqueue_script('touchswipe');	
 	}
 
@@ -295,16 +295,20 @@ function nectar_main_styles() {
 		 wp_register_style('rgs', get_template_directory_uri() . '/css/rgs.css', '', '6.0.1');
 		 wp_register_style('orbit', get_template_directory_uri() . '/css/orbit.css');
 		 wp_register_style('twentytwenty', get_template_directory_uri() . '/css/twentytwenty.css');
-		 wp_register_style('woocommerce', get_template_directory_uri() . '/css/woocommerce.css','', '7.5');
-		 wp_register_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
+		 wp_register_style('woocommerce', get_template_directory_uri() . '/css/woocommerce.css','', '7.6');
+		 wp_register_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css', '', '4.6.3');
+		 wp_register_style('iconsmind', get_template_directory_uri() . '/css/iconsmind.css', '', '7.6');
 		 wp_register_style('linea', get_template_directory_uri() . '/css/fonts/svg/font/arrows_styles.css');
-		 wp_register_style("main-styles", get_stylesheet_directory_uri() . "/style.css", '', '7.5');
+		 wp_register_style('fullpage', get_template_directory_uri() . '/css/fullpage.css');
+		 wp_register_style('nectarslider', get_template_directory_uri() . '/css/nectar-slider.css');
+		 wp_register_style("main-styles", get_stylesheet_directory_uri() . "/style.css", '', '7.6');
+		 wp_register_style("nectar-portfolio", get_template_directory_uri() . "/css/portfolio.css", '', '7.6');
 		 wp_register_style("pretty_photo", get_template_directory_uri() . "/css/prettyPhoto.css", '', '7.0.1');
 		 wp_register_style("magnific", get_template_directory_uri() . "/css/magnific.css", '', '6.2');
-		 wp_register_style("responsive", get_template_directory_uri() . "/css/responsive.css", '', '7.5');
+		 wp_register_style("responsive", get_template_directory_uri() . "/css/responsive.css", '', '7.6');
 		 wp_register_style("select2", get_template_directory_uri() . "/css/select2.css", '', '6.2');
 		 wp_register_style("non-responsive", get_template_directory_uri() . "/css/non-responsive.css");
-		 wp_register_style("skin-ascend", get_template_directory_uri() . "/css/ascend.css", '', '7.5');
+		 wp_register_style("skin-ascend", get_template_directory_uri() . "/css/ascend.css", '', '7.6');
 		 wp_register_style("box-roll", get_template_directory_uri() . "/css/box-roll.css");
 		 wp_register_style("nectar-ie8", get_template_directory_uri() . "/css/ie8.css");
 
@@ -353,6 +357,9 @@ function nectar_main_styles() {
 		$transition_method = (!empty($options['transition-method'])) ? $options['transition-method'] : 'ajax';
 		if(!empty($options['ajax-page-loading']) && $options['ajax-page-loading'] == '1' && $transition_method == 'ajax') {
 			wp_enqueue_style('wp-mediaelement');
+			wp_enqueue_style('fullpage');
+			wp_enqueue_style('nectarslider');
+			wp_enqueue_style('nectar-portfolio');
 		}
 }
 
@@ -369,6 +376,27 @@ function nectar_page_sepcific_styles() {
 	if ( is_page_template('template-home-1.php') || is_page_template('template-home-2.php') || is_page_template('template-home-3.php') || is_page_template('template-home-4.php')) {
 		wp_enqueue_style('orbit'); 
 	}
+
+	//full page
+	$page_full_screen_rows = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows', true) : '';
+	if($page_full_screen_rows == 'on') wp_enqueue_style('fullpage');
+
+	//nectar slider
+	if(stripos( $post_content, '[nectar_slider') !== FALSE || stripos( $portfolio_extra_content, '[nectar_slider') !== FALSE
+	|| stripos($post_content, 'type="nectarslider_style"') !== FALSE || stripos( $portfolio_extra_content, 'type="nectarslider_style"') !== FALSE) {
+		
+		wp_enqueue_style('nectarslider');	
+	}
+
+	//portfolio
+	if(stripos( $post_content, 'nectar_portfolio') !== FALSE || stripos( $portfolio_extra_content, 'nectar_portfolio') !== FALSE ||
+	   stripos( $post_content, 'recent_projects') !== FALSE || stripos( $portfolio_extra_content, 'recent_projects') !== FALSE ||
+	   stripos( $post_content, 'type="image_grid"') !== FALSE || stripos( $portfolio_extra_content, 'type="image_grid"') !== FALSE ||
+	   stripos( $post_content, "type='image_grid'") !== FALSE || stripos( $portfolio_extra_content, "type='image_grid'") !== FALSE || 
+	   is_page_template('template-portfolio.php') || is_post_type_archive('portfolio') || is_singular('portfolio') || is_tax('project-attributes') || is_tax('project-type')) {
+
+		wp_enqueue_style('nectar-portfolio');
+    }
 	
 	//WooCommerce
     if ( function_exists( 'is_woocommerce' ) ) {
@@ -384,6 +412,11 @@ function nectar_page_sepcific_styles() {
 	   strpos($portfolio_extra_content,'.svg') !== false && strpos($portfolio_extra_content,"icon color='Extra-Color-Gradient-1'") !== false ||
 	   strpos($portfolio_extra_content,'.svg') !== false && strpos($portfolio_extra_content,"icon color='Extra-Color-Gradient-2'") !== false ) {
 		wp_enqueue_style('linea'); 
+	}
+
+	if(strpos($post_content,'iconsmind-') !== false ||
+	   strpos($portfolio_extra_content,'iconsmind-') !== false) {
+		wp_enqueue_style('iconsmind'); 
 	}
 
 	global $options;
@@ -529,7 +562,7 @@ if (!function_exists('nectar_page_specific_dynamic')) {
 						transition: opacity 0.2s linear, color 0.2s linear;
 					 }
 					#header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav > ul > li > a:hover, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.sfHover > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.current_page_ancestor > a, 
-					#header-outer.transparent header#top nav .sf-menu > li.current-menu-item > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.current-menu-ancestor > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.current_page_item > a,
+					#header-outer.transparent header#top nav .sf-menu > li.current-menu-item > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu li.current-menu-item > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.current-menu-ancestor > a, #header-outer.transparent:not([data-lhe="animated_underline"]) header#top nav .sf-menu > li.current_page_item > a,
 					#header-outer.transparent header#top nav > ul > li > a:hover > .sf-sub-indicator > i, #header-outer.transparent header#top nav > ul > li.sfHover > a > span > i, #header-outer.transparent header#top nav ul #search-btn a:hover span, #header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a:hover span,
 					#header-outer.transparent header#top nav .sf-menu > li.current-menu-item > a i, #header-outer.transparent header#top nav .sf-menu > li.current-menu-ancestor > a i,
 					#header-outer.transparent .cart-outer:hover .icon-salient-cart, .ascend #boxed #header-outer.transparent .cart-outer:hover .cart-menu .cart-icon-wrap .icon-salient-cart
@@ -727,6 +760,14 @@ if (!function_exists('nectar_page_specific_dynamic')) {
 		    }';
 		}
 
+		if($woocommerce && !empty($options['product_archive_bg_color'])) {
+			echo '.post-type-archive-product.woocommerce .container-wrap, .tax-product_cat.woocommerce .container-wrap { background-color: '.$options['product_archive_bg_color'].'; } ';
+		}
+
+		if($woocommerce && !empty($options['product_bg_color'])) {
+		 	echo '.woocommerce ul.products li.product.material, .woocommerce-page ul.products li.product.material { background-color: '.$options['product_bg_color'].'; }';
+		}
+
 		if($woocommerce && !empty($options['product_tab_position']) && $options['product_tab_position'] == 'fullwidth') echo '
 		 .woocommerce.single-product #single-meta { position: relative!important; top: 0!important; margin: 0; left: 8px; height: auto; } 
 		 .woocommerce.single-product #single-meta:after { display: block; content: " "; clear: both; height: 1px;  } 
@@ -912,6 +953,7 @@ if(function_exists('add_theme_support')) {
 # Image sizes 
 #-----------------------------------------------------------------#
 
+
 if (!function_exists('nectar_add_image_sizes')) {
 	
 	function nectar_add_image_sizes(){
@@ -921,11 +963,26 @@ if (!function_exists('nectar_add_image_sizes')) {
 		add_image_size( 'portfolio-thumb', 600, 403, true ); 
 		add_image_size( 'portfolio-widget', 100, 100, true ); 
 
-		add_image_size( 'wide', 1000, 500, true );  
-		add_image_size( 'regular', 500, 500, true ); 
-		add_image_size( 'tall', 500, 1000, true ); 
-		add_image_size( 'wide_tall', 1000, 1000, true );
+		global $options;
+		$masonry_sizing_type = (!empty($options['portfolio_masonry_grid_sizing']) && $options['portfolio_masonry_grid_sizing'] == 'photography') ? 'photography' : 'default';
+
+		if($masonry_sizing_type != 'photography') {
+			add_image_size( 'wide', 1000, 500, true );  
+			add_image_size( 'regular', 500, 500, true ); 
+			add_image_size( 'tall', 500, 1000, true ); 
+			add_image_size( 'wide_tall', 1000, 1000, true );
+		} else {
+			//these two are still needed for meta overlaid masonry blog
+			add_image_size( 'regular', 500, 500, true ); 
+			add_image_size( 'wide_tall', 1000, 1000, true );
+
+			add_image_size( 'wide_photography', 900, 600, true );  
+			add_image_size( 'regular_photography', 450, 600, true ); 
+			add_image_size( 'wide_tall_photography', 900, 1200, true );
+		}
+
 		add_image_size( 'large_featured', 1700, 700, true );  
+		//add_image_size( 'disable_crop', 800, 800, true ); 
 
 	}
 }
@@ -985,21 +1042,25 @@ if ( !function_exists( 'nectar_walker_nav_menu' ) ) {
 		        $id_field = $this->db_fields['id'];
 		        global $options;
 		        $theme_skin = (!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') ? 'ascend' : 'default';
+		        $headerFormat = (!empty($options['header_format'])) ? $options['header_format'] : 'default';
 
 		        //button styling
 		        $button_style = get_post_meta( $element->$id_field, 'menu-item-nectar-button-style', true);
 		        if(!empty($button_style))
 		        	$element->classes[] = $button_style;
 
-		        if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent == 0 && $theme_skin !='ascend') { 
+		        if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent == 0 && $theme_skin !='ascend' && $headerFormat != 'left-header') { 
 		            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-down"></i></span>'; 
 					$element->classes[] = 'sf-with-ul';
 		        }
 				
-				if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent != 0) { 
+				if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent != 0 && $headerFormat != 'left-header') { 
 		            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-right"></i></span>'; 
 		        }
 			    
+			    if(empty($button_style) && $headerFormat == 'left-header') 
+			   	   $element->title = '<span>'. $element->title . '</span>';
+
 		        Walker_Nav_Menu::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
 		    }
 		}
@@ -1204,6 +1265,24 @@ if(!empty($options['ajax-page-loading']) && $options['ajax-page-loading'] == '1'
 }
 
 #-----------------------------------------------------------------#
+# Site Title 
+#-----------------------------------------------------------------#
+
+function theme_slug_setup() {
+   add_theme_support( 'title-tag' );
+}
+add_action( 'after_setup_theme', 'theme_slug_setup' );
+
+if ( ! function_exists( '_wp_render_title_tag' ) ) {
+    function theme_slug_render_title() { ?>
+
+		<title><?php wp_title( '|', true, 'right' ); ?></title> <?php
+    }
+
+    add_action( 'wp_head', 'theme_slug_render_title' );
+}
+
+#-----------------------------------------------------------------#
 # Widget areas
 #-----------------------------------------------------------------#
 if(function_exists('register_sidebar')) {
@@ -1217,10 +1296,10 @@ if(function_exists('register_sidebar')) {
 	
 	global $options; 
 	$footerColumns = (!empty($options['footer_columns'])) ? $options['footer_columns'] : '4';
-	if($footerColumns == '3' || $footerColumns == '4'){
+	if($footerColumns == '3' || $footerColumns == '4' || $footerColumns == '5'){
 		register_sidebar(array('name' => 'Footer Area 3', 'id' => 'footer-area-3', 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget'  => '</div>', 'before_title'  => '<h4>', 'after_title'   => '</h4>'));
 	}
-	if($footerColumns == '4'){
+	if($footerColumns == '4' || $footerColumns == '5'){
 		register_sidebar(array('name' => 'Footer Area 4', 'id' => 'footer-area-4', 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget'  => '</div>', 'before_title'  => '<h4>', 'after_title'   => '</h4>'));
 	}
 
@@ -1355,6 +1434,8 @@ if(!empty($options['default-lightbox']) && $options['default-lightbox'] == '1'){
 #-----------------------------------------------------------------#
 
 function nectar_add_attachment_field_credit( $form_fields, $post ) {
+
+
     $form_fields['image-url'] = array(
         'label' => 'Image URL',
         'input' => 'text',
@@ -1368,6 +1449,17 @@ function nectar_add_attachment_field_credit( $form_fields, $post ) {
         'value' => esc_attr( get_post_meta( $post->ID, 'nectar_particle_shape_bg_color', true ) ),
         'helps' => 'Enter your color in hex format e.g. "#1ed760'
     );
+
+    $image_gal_masonry_sizing_mapping = null;
+    $image_gal_masonry_sizing_mapping_options = array('regular'=>'Regular', 'wide'=>'Wide', 'tall'=>'Tall', 'wide_tall'=>'Wide & Tall');
+    $meta = get_post_meta( $post->ID, 'nectar_image_gal_masonry_sizing', true );
+    foreach( $image_gal_masonry_sizing_mapping_options as $key => $option ) {
+		$image_gal_masonry_sizing_mapping .= '<option value="' . $key . '"';
+		if( $meta ){
+			if( $meta == $key ) $image_gal_masonry_sizing_mapping .= ' selected="selected"'; 
+		} 
+		$image_gal_masonry_sizing_mapping .=  '>'. $option .'</option>';
+	} 
 
     $color_mapping = null;
     $color_mapping_options = array('original'=>'Original', 'solid'=>'Solid Color', 'random'=>'Random');
@@ -1401,6 +1493,14 @@ function nectar_add_attachment_field_credit( $form_fields, $post ) {
 		} 
 		$alpha .=  '>'. $option .'</option>';
 	} 
+
+	$form_fields["masonry-image-sizing"] = array(
+     	'label' => 'Masonry Sizing',
+     	'input' => 'html',
+        'html' => "<select name='attachments[{$post->ID}][masonry-image-sizing]' id='attachments[{$post->ID}][masonry-image-sizing]'>".$image_gal_masonry_sizing_mapping."</select>",
+		'helps' => '',
+		'value' => get_post_meta( $post->ID, 'nectar_image_gal_masonry_sizing', true )
+	);
 
     $form_fields["shape-color-mapping"] = array(
      	'label' => 'Color Mapping',
@@ -1445,27 +1545,41 @@ function nectar_add_attachment_field_credit( $form_fields, $post ) {
 add_filter( 'attachment_fields_to_edit', 'nectar_add_attachment_field_credit', 10, 2 );
 
 function nectar_add_attachment_field_credit_save( $post, $attachment ) {
-    if( isset( $attachment['image-url'] ) )
-    update_post_meta( $post['ID'], 'nectar_image_gal_url', $attachment['image-url'] );
-	
-	if( isset( $attachment['shape-bg-color'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_shape_bg_color', $attachment['shape-bg-color'] );
+    if( isset( $attachment['image-url'] ) ) {
+    	$image_url_sanitized = sanitize_text_field($attachment['image-url']);
+    	update_post_meta( $post['ID'], 'nectar_image_gal_url', $image_url_sanitized );
+	}
 
-	if( isset( $attachment['shape-particle-color'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_shape_color', $attachment['shape-particle-color'] );
+	if( isset( $attachment['masonry-image-sizing'] ) ) {
+		$masonry_image_sizing_sanitized = sanitize_text_field($attachment['masonry-image-sizing']);
+	    update_post_meta( $post['ID'], 'nectar_image_gal_masonry_sizing', $masonry_image_sizing_sanitized );
+	}
 
-	if( isset( $attachment['shape-color-mapping'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_shape_color_mapping', $attachment['shape-color-mapping'] );
+	if( isset( $attachment['shape-bg-color'] ) ) {
+		$shape_bg_color_sanitized = sanitize_text_field($attachment['shape-bg-color']);
+	    update_post_meta( $post['ID'], 'nectar_particle_shape_bg_color', $shape_bg_color_sanitized );
+	}
 
-	if( isset( $attachment['shape-color-alpha'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_shape_color_alpha', $attachment['shape-color-alpha'] );
-
-	if( isset( $attachment['shape-density'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_shape_density', $attachment['shape-density'] );
-
-	if( isset( $attachment['shape-max-particle-size'] ) )
-    update_post_meta( $post['ID'], 'nectar_particle_max_particle_size', $attachment['shape-max-particle-size'] );
-
+	if( isset( $attachment['shape-particle-color'] ) ) {
+		$shape_particle_color_sanitized = sanitize_text_field($attachment['shape-particle-color']);
+	    update_post_meta( $post['ID'], 'nectar_particle_shape_color', $shape_particle_color_sanitized );
+	}
+	if( isset( $attachment['shape-color-mapping'] ) ) {
+		$shape_color_mapping_sanitized = sanitize_text_field($attachment['shape-color-mapping']);
+	    update_post_meta( $post['ID'], 'nectar_particle_shape_color_mapping',$shape_color_mapping_sanitized );
+	}
+	if( isset( $attachment['shape-color-alpha'] ) ) {
+		$shape_color_alpha_sanitized = sanitize_text_field($attachment['shape-color-alpha']);
+	    update_post_meta( $post['ID'], 'nectar_particle_shape_color_alpha', $shape_color_alpha_sanitized );
+	}
+	if( isset( $attachment['shape-density'] ) ) {
+		$shape_density_sanitized = sanitize_text_field($attachment['shape-density']);
+	    update_post_meta( $post['ID'], 'nectar_particle_shape_density', $shape_density_sanitized );
+	}
+	if( isset( $attachment['shape-max-particle-size'] ) ) {
+		$shape_max_particle_size_sanitized = sanitize_text_field($attachment['shape-max-particle-size']);
+	    update_post_meta( $post['ID'], 'nectar_particle_max_particle_size', $shape_max_particle_size_sanitized );
+	}
     return $post;
 }
 add_filter( 'attachment_fields_to_save', 'nectar_add_attachment_field_credit_save', 10, 2 );
@@ -1777,6 +1891,7 @@ function nectar_get_full_page_options() {
 	$page_full_screen_rows_footer = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows_footer', true) : '';
 	$page_full_screen_rows_content_overflow = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows_content_overflow', true) : '';
 	$page_full_screen_rows_bg_img_animation = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows_row_bg_animation', true) : ''; 
+	$page_full_screen_rows_mobile_disable = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows_mobile_disable', true) : ''; 
 
 	$nectar_full_page_options = array(
 		'page_full_screen_rows' => $page_full_screen_rows,
@@ -1786,7 +1901,8 @@ function nectar_get_full_page_options() {
 		'page_full_screen_rows_dot_navigation' => $page_full_screen_rows_dot_navigation,
 		'page_full_screen_rows_footer' => $page_full_screen_rows_footer,
 		'page_full_screen_rows_content_overflow' => $page_full_screen_rows_content_overflow,
-		'page_full_screen_rows_bg_img_animation' => $page_full_screen_rows_bg_img_animation
+		'page_full_screen_rows_bg_img_animation' => $page_full_screen_rows_bg_img_animation,
+		'page_full_screen_rows_mobile_disable' => $page_full_screen_rows_mobile_disable
 	);
 
 	return $nectar_full_page_options;
@@ -1799,25 +1915,25 @@ function nectar_header_social_icons($location) {
 	global $options;
 
 	$social_networks = array(
-		'twitter' => 'icon-twitter',
-		'facebook' => 'icon-facebook',
-		'vimeo' => 'icon-vimeo',
-		'pinterest' => 'icon-pinterest',
-		'linkedin' => 'icon-linkedin',
-		'youtube' => 'icon-youtube-play',
-		'tumblr' => 'icon-tumblr',
-		'dribbble' => 'icon-dribbble',
-		'rss' => 'icon-rss',
-		'github' => 'icon-github-alt',
-		'google-plus' => 'icon-google-plus',
-		'instagram' => 'icon-instagram',
-		'stackexchange' => 'icon-stackexchange',
-		'soundcloud' => 'icon-soundcloud',
-		'flickr' => 'icon-flickr',
+		'twitter' => 'fa fa-twitter',
+		'facebook' => 'fa fa-facebook',
+		'vimeo' => 'fa fa-vimeo',
+		'pinterest' => 'fa fa-pinterest',
+		'linkedin' => 'fa fa-linkedin',
+		'youtube' => 'fa fa-youtube-play',
+		'tumblr' => 'fa fa-tumblr',
+		'dribbble' => 'fa fa-dribbble',
+		'rss' => 'fa fa-rss',
+		'github' => 'fa fa-github-alt',
+		'google-plus' => 'fa fa-google-plus',
+		'instagram' => 'fa fa-instagram',
+		'stackexchange' => 'fa fa-stackexchange',
+		'soundcloud' => 'fa fa-soundcloud',
+		'flickr' => 'fa fa-flickr',
 		'spotify' => 'icon-salient-spotify',
-		'vk' => 'icon-vk',
-		'vine' => 'fa-vine',
-		'behance' => 'icon-be'
+		'vk' => 'fa fa-vk',
+		'vine' => 'fa fa-vine',
+		'behance' => 'fa fa-behance'
 	);
 	$social_output_html = '';
 
@@ -1835,8 +1951,10 @@ function nectar_header_social_icons($location) {
 		foreach($social_networks as $network_name => $icon_class) {
 			
 			if($network_name == 'rss') {
-				if(!empty($options['use-'.$network_name.'-icon-header']) && $options['use-'.$network_name.'-icon-header'] == 1) 
-					$social_output_html .= $social_link_before.'<a target="_blank" href="'.(!empty($options['rss-url'])) ? $options['rss-url'] : get_bloginfo('rss_url').'"><i class="'.$icon_class.'"></i> </a>'.$social_link_after;
+				if(!empty($options['use-'.$network_name.'-icon-header']) && $options['use-'.$network_name.'-icon-header'] == 1) {
+					$nectar_rss_url_link = (!empty($options['rss-url'])) ? $options['rss-url'] : get_bloginfo('rss_url');
+					$social_output_html .= $social_link_before.'<a target="_blank" href="'.$nectar_rss_url_link.'"><i class="'.$icon_class.'"></i> </a>'.$social_link_after;
+				}
 			}
 			else {
 				if(!empty($options['use-'.$network_name.'-icon-header']) && $options['use-'.$network_name.'-icon-header'] == 1) 
@@ -2685,7 +2803,19 @@ if (!function_exists('nectar_slider_display')) {
 								
 								}
 								
-								if(!empty($down_arrow) && $down_arrow == 'on') { $slider .=  '<a href="#" class="slider-down-arrow"><i class="icon-salient-down-arrow icon-default-style"> <span class="ie-fix"></span> </i></a>'; }  
+								if(!empty($down_arrow) && $down_arrow == 'on') { 
+
+									 $header_down_arrow_style = (!empty($options['header-down-arrow-style'])) ? $options['header-down-arrow-style'] : 'default'; 
+			 	 
+								 	 if($header_down_arrow_style == 'scroll-animation') {
+								 	 	$slider .=  '<a href="#" class="slider-down-arrow no-border"><svg class="nectar-scroll-icon" viewBox="0 0 30 45" enable-background="new 0 0 30 45">
+					                			<path class="nectar-scroll-icon-path" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" d="M15,1.118c12.352,0,13.967,12.88,13.967,12.88v18.76  c0,0-1.514,11.204-13.967,11.204S0.931,32.966,0.931,32.966V14.05C0.931,14.05,2.648,1.118,15,1.118z"></path>
+					            			  </svg></a>';
+								 	 } else {
+
+										$slider .=  '<a href="#" class="slider-down-arrow"><i class="icon-salient-down-arrow icon-default-style"> <span class="ie-fix"></span> </i></a>';
+									} 
+								}  
 								
 
 								$active_texture = ($video_texture == 'on') ? 'active_texture' : '';
@@ -3341,34 +3471,34 @@ function nectar_blog_social_sharing() {
 
 				//facebook
 				if(!empty($options['blog-facebook-sharing']) && $options['blog-facebook-sharing'] == 1) { 
-					echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'>  <i class='icon-facebook'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
+					echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'>  <i class='fa fa-facebook'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
 				}
 				//twitter
 				if(!empty($options['blog-twitter-sharing']) && $options['blog-twitter-sharing'] == 1) {
-					echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='icon-twitter'></i> <span class='social-text'>".__('Tweet',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
+					echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='fa fa-twitter'></i> <span class='social-text'>".__('Tweet',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
 				}
 				
 				//google plus
 				if(!empty($options['blog-google-plus-sharing']) && $options['blog-google-plus-sharing'] == 1) {
-					echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-google-plus'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'> ".GetGooglePlusShares(get_permalink($post->ID))." </span></a>";
+					echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-google-plus'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'>0</span></a>";
 				}
 				
 				//linkedIn
 				if(!empty($options['blog-linkedin-sharing']) && $options['blog-linkedin-sharing'] == 1) {
-					echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-linkedin'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'> </span></a>";
+					echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-linkedin'></i> <span class='social-text'>".__('Share',NECTAR_THEME_NAME)."</span> <span class='count'> </span></a>";
 				}
 				
 				//pinterest
 				if(!empty($options['blog-pinterest-sharing']) && $options['blog-pinterest-sharing'] == 1) {
-					echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='icon-pinterest'></i> <span class='social-text'>".__('Pin',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
+					echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='fa fa-pinterest'></i> <span class='social-text'>".__('Pin',NECTAR_THEME_NAME)."</span> <span class='count'></span></a>";
 				}
 			} else {
 				//facebook
-				echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-facebook'></i> <span class='count'></span></a>";
-				echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='icon-twitter'></i> <span class='count'></span></a>";
-				echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-google-plus'></i> <span class='count'> ".GetGooglePlusShares(get_permalink($post->ID))." </span></a>";
-				echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-linkedin'></i> <span class='count'> </span></a>";
-				echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='icon-pinterest'></i> <span class='count'></span></a>";
+				echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-facebook'></i> <span class='count'></span></a>";
+				echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='fa fa-twitter'></i> <span class='count'></span></a>";
+				echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-google-plus'></i> <span class='count'>0</span></a>";
+				echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-linkedin'></i> <span class='count'> </span></a>";
+				echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='fa fa-pinterest'></i> <span class='count'></span></a>";
 				
 			}
 			
@@ -3794,6 +3924,7 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 		global $options;
 		global $post;
 		global $nectar_theme_skin;
+		global $woocommerce;
 
 		$fullscreen_rows = get_post_meta($postid, '_nectar_full_screen_rows', true);
 		if($fullscreen_rows == 'on')
@@ -3804,6 +3935,19 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 		$parallax_bg = get_post_meta($postid, '_nectar_header_parallax', true);
     	$title = get_post_meta($postid, '_nectar_header_title', true);
     	$subtitle = get_post_meta($postid, '_nectar_header_subtitle', true);
+    	//woocommerce archives
+    	if(function_exists('woocommerce_page_title')) {
+	    	if($woocommerce && is_product_category() || $woocommerce && is_product_tag()) {
+	    		$subtitle = '';
+	    		$title = woocommerce_page_title(false);
+
+	    		$cate = get_queried_object();
+	    		$t_id = (property_exists($cate, 'term_id')) ? $cate->term_id : '';
+	    		$product_terms =  get_option( "taxonomy_$t_id" );
+
+	    		$bg = (!empty($product_terms['product_category_image'])) ? $product_terms['product_category_image'] : $bg;
+	    	}
+	    }
 		$height = get_post_meta($postid, '_nectar_header_bg_height', true); 
 		$page_template = get_post_meta($postid, '_wp_page_template', true); 
 		$display_sortable = get_post_meta($postid, 'nectar-metabox-portfolio-display-sortable', true);
@@ -3986,24 +4130,24 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 										
 											//facebook
 											if(!empty($options['blog-facebook-sharing']) && $options['blog-facebook-sharing'] == 1) { 
-												echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-facebook'></i> <span class='count'></span></a>";
+												echo "<a class='facebook-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-facebook'></i> <span class='count'></span></a>";
 											}
 											//twitter
 											if(!empty($options['blog-twitter-sharing']) && $options['blog-twitter-sharing'] == 1) {
-												echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='icon-twitter'></i> <span class='count'></span></a>";
+												echo "<a class='twitter-share nectar-sharing' href='#' title='".__('Tweet this', NECTAR_THEME_NAME)."'> <i class='fa fa-twitter'></i> <span class='count'></span></a>";
 											}
 											//google plus
 											if(!empty($options['blog-google-plus-sharing']) && $options['blog-google-plus-sharing'] == 1) {
-												echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-google-plus'></i> <span class='count'> ".GetGooglePlusShares(get_permalink($post->ID))." </span></a>";
+												echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-google-plus'></i> <span class='count'>0</span></a>";
 											}
 											
 											//linkedIn
 											if(!empty($options['blog-linkedin-sharing']) && $options['blog-linkedin-sharing'] == 1) {
-												echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-linkedin'></i> <span class='count'> </span></a>";
+												echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-linkedin'></i> <span class='count'> </span></a>";
 											}
 											//pinterest
 											if(!empty($options['blog-pinterest-sharing']) && $options['blog-pinterest-sharing'] == 1) {
-												echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='icon-pinterest'></i> <span class='count'></span></a>";
+												echo "<a class='pinterest-share nectar-sharing' href='#' title='".__('Pin this', NECTAR_THEME_NAME)."'> <i class='fa fa-pinterest'></i> <span class='count'></span></a>";
 											}
 											
 										  echo '</div></li>';
@@ -4067,11 +4211,19 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 			 if(($post->ID != 0 && $post->post_type == 'post' && is_single()) && $fullscreen_header == true || $page_fullscreen_header == 'on') { 
 			 	 $rotate_in_class = ( $text_effect == 'rotate_in') ? 'hidden' : null;
 			 	 $button_styling = (!empty($options['button-styling'])) ? $options['button-styling'] : 'default'; 
-			 	 if($button_styling == 'default'){
-			 	 	echo '<div class="scroll-down-wrap"><a href="#" class="section-down-arrow '.$rotate_in_class.'"><i class="icon-salient-down-arrow icon-default-style"> </i></a></div>';
+			 	 $header_down_arrow_style = (!empty($options['header-down-arrow-style'])) ? $options['header-down-arrow-style'] : 'default'; 
+			 	 
+			 	 if($header_down_arrow_style == 'scroll-animation') {
+			 	 	echo '<div class="scroll-down-wrap no-border"><a href="#" class="section-down-arrow '.$rotate_in_class.'"><svg class="nectar-scroll-icon" viewBox="0 0 30 45" enable-background="new 0 0 30 45">
+                			<path class="nectar-scroll-icon-path" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" d="M15,1.118c12.352,0,13.967,12.88,13.967,12.88v18.76  c0,0-1.514,11.204-13.967,11.204S0.931,32.966,0.931,32.966V14.05C0.931,14.05,2.648,1.118,15,1.118z"></path>
+            			  </svg></a></div>';
 			 	 } else {
-			 	 	echo '<div class="scroll-down-wrap '.$rotate_in_class.'"><a href="#" class="section-down-arrow"><i class="fa fa-angle-down top"></i><i class="fa fa-angle-down"></i></a></div>';
-			 	 }
+				 	 if($button_styling == 'default'){
+				 	 	echo '<div class="scroll-down-wrap"><a href="#" class="section-down-arrow '.$rotate_in_class.'"><i class="icon-salient-down-arrow icon-default-style"> </i></a></div>';
+				 	 } else {
+				 	 	echo '<div class="scroll-down-wrap '.$rotate_in_class.'"><a href="#" class="section-down-arrow"><i class="fa fa-angle-down top"></i><i class="fa fa-angle-down"></i></a></div>';
+				 	 }
+				 }
 
 			  } 
 
@@ -4302,6 +4454,13 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 
 
 			<?php 
+			//category archive text align
+			$blog_type = $options['blog_type'];
+			if($blog_type == null) $blog_type = 'std-blog-sidebar';
+
+			$blog_standard_type = (!empty($options['blog_standard_type'])) ? $options['blog_standard_type'] : 'classic';
+			$archive_header_text_align = ($blog_type != 'masonry-blog-sidebar' && $blog_type != 'masonry-blog-fullwidth' && $blog_type != 'masonry-blog-full-screen-width' && $blog_standard_type == 'minimal') ? 'center' : 'left';
+
 			if(!empty($terms['category_image']) || !empty($archive_bg_img)) { 
 
 				$bg_img = $archive_bg_img;
@@ -4315,7 +4474,7 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 			?>
 
 			<div id="page-header-wrap" data-midnight="light" <?php echo $wrapper_height_style; ?>>	 
-				<div id="page-header-bg" data-animate-in-effect="<?php echo $animate_in_effect; ?>" id="page-header-bg" data-text-effect="" data-bg-pos="center" data-alignment="left" data-alignment-v="center" data-parallax="0" data-height="350" style="height: 350px;">
+				<div id="page-header-bg" data-animate-in-effect="<?php echo $animate_in_effect; ?>" id="page-header-bg" data-text-effect="" data-bg-pos="center" data-alignment="<?php echo $archive_header_text_align; ?>" data-alignment-v="center" data-parallax="0" data-height="350" style="height: 350px;">
 			
 					<div class="page-header-bg-image" style="background-image: url(<?php echo $bg_img; ?>);"></div> 
 
@@ -4432,7 +4591,7 @@ function using_page_header($post_id){
 	if(!empty($options['blog_header_type']) && $options['blog_header_type'] == 'fullscreen' && is_singular('post'))  $using_applicable_shortcode = 1;
 
 	//incase of search / tax / removing effect
-	if(is_search() || is_tax() || $disable_effect == 'on') { $using_applicable_shortcode = 0; $header_bg = 0; $header_bg_color = 0; $bg_type = 'image_bg'; }
+	if(is_search() || $disable_effect == 'on') { $using_applicable_shortcode = 0; $header_bg = 0; $header_bg_color = 0; $bg_type = 'image_bg'; }
 
 	$page_full_screen_rows = (isset($post->ID)) ? get_post_meta($post->ID, '_nectar_full_screen_rows', true) : '';
 	//if forcing effect
@@ -4530,6 +4689,8 @@ if ( !function_exists( 'nectar_pagination' ) ) {
 			          'format' => $format,  
 			          'current' => $current,  
 			          'total' => $total_pages,  
+			          'prev_text'    => __('Previous',NECTAR_THEME_NAME),
+    				  'next_text'    => __('Next',NECTAR_THEME_NAME)
 			        )); 
 					
 				  echo  '</div>'; 
@@ -4541,8 +4702,8 @@ if ( !function_exists( 'nectar_pagination' ) ) {
 			
 			if( get_next_posts_link() || get_previous_posts_link() ) { 
 				echo '<div id="pagination" data-is-text="'.__("All items loaded", NECTAR_THEME_NAME).'">
-				      <div class="prev">'.get_previous_posts_link('&laquo; Previous Entries').'</div>
-				      <div class="next">'.get_next_posts_link('Next Entries &raquo;','').'</div>
+				      <div class="prev">'.get_previous_posts_link('&laquo; Previous').'</div>
+				      <div class="next">'.get_next_posts_link('NextPrevious &raquo;','').'</div>
 			          </div>';
 			
 	        }
@@ -4557,7 +4718,180 @@ if ( !function_exists( 'nectar_pagination' ) ) {
 #-----------------------------------------------------------------#
 # Woocommerce
 #-----------------------------------------------------------------#
+global $woocommerce;
 
+$main_shop_layout = (!empty($options['main_shop_layout'])) ? $options['main_shop_layout'] : 'no-sidebar';
+$single_product_layout = (!empty($options['single_product_layout'])) ? $options['single_product_layout'] : 'no-sidebar';
+
+remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
+function nectar_shop_wrapper_start() {
+   echo '<div class="container-wrap"><div class="container main-content"><div class="row"><div class="nectar-shop-header">';
+   do_action( 'nectar_shop_header_markup' );
+   echo '</div>';
+}
+
+function nectar_shop_wrapper_end() {
+  echo '</div></div></div>';
+}
+
+
+function nectar_shop_wrapper_start_sidebar_left() {
+
+    echo '<div class="container-wrap"><div class="container main-content"><div class="nectar-shop-header">';
+    do_action( 'nectar_shop_header_markup' );
+    echo '</div><div class="row"><div id="sidebar" class="col span_3 col">';
+    wc_get_template( 'global/sidebar.php' );
+    echo '</div><div id="post-area" class="col span_9 col_last">';
+}
+
+function nectar_shop_wrapper_end_sidebar_left() {
+    echo '</div></div></div></div>';
+}
+
+
+function nectar_shop_wrapper_start_sidebar_right() {
+    echo '<div class="container-wrap"><div class="container main-content"><div class="nectar-shop-header">';
+    do_action( 'nectar_shop_header_markup' );
+    echo '</div><div class="row"><div id="post-area" class="col span_9">';
+}
+
+function nectar_shop_wrapper_end_sidebar_right() {
+	echo '</div><div id="sidebar" class="col span_3 col_last">';
+    wc_get_template( 'global/sidebar.php' );
+    echo '</div></div></div></div>';
+}
+
+function nectar_shop_wrapper_start_fullwidth() {
+
+    echo '<div class="container-wrap"><div class="container main-content"><div class="row"><div class="full-width-content"><div class="nectar-shop-header">';
+    do_action( 'nectar_shop_header_markup' );
+    echo '</div>';
+}
+
+function nectar_shop_wrapper_end_fullwidth() {
+    echo '</div></div></div></div>';
+}
+
+if (!function_exists('nectar_shop_loop_columns')) {
+	function nectar_shop_loop_columns() {
+		return 3; // 3 products per row
+	}
+}
+
+//change header 
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering',30);
+add_filter( 'woocommerce_show_page_title', '__return_false' );
+add_filter( 'woocommerce_breadcrumb_defaults', 'nectar_change_breadcrumb_delimiter' );
+function nectar_change_breadcrumb_delimiter( $defaults ) {
+	$defaults['delimiter'] = ' <i class="fa fa-angle-right"></i> ';
+	return $defaults;
+}
+
+if($woocommerce) {
+	add_action( 'wp', 'nectar_woo_shop_markup' );
+}
+
+function nectar_woo_shop_markup() {
+
+	global $single_product_layout;
+	global $main_shop_layout;
+	global $woocommerce;
+
+	if($woocommerce && !is_product()) {
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+	}
+
+	//page header
+	if(is_shop() || is_product_category() || is_product_tag()) {
+	
+		add_action('woocommerce_before_main_content', 'salient_shop_header', 10);
+
+		function salient_shop_header() {
+			//page header for main shop page
+			nectar_page_header(woocommerce_get_page_id('shop'));
+		}
+
+		function salient_woo_shop_title() {
+			echo '<h1 class="page-title">';
+			woocommerce_page_title();
+			echo '</h1>';
+		}
+
+		$header_title = get_post_meta(woocommerce_get_page_id('shop'), '_nectar_header_title', true);
+		if(is_shop() && empty($header_title)) {
+			add_action('nectar_shop_header_markup','salient_woo_shop_title',10);
+		}
+
+		add_action('nectar_shop_header_markup', 'woocommerce_catalog_ordering', 10);
+		add_action('nectar_shop_header_markup', 'woocommerce_result_count', 10);
+		add_action('nectar_shop_header_markup', 'woocommerce_breadcrumb', 10);
+
+	} 
+
+	//no sidebar shop single
+	if (is_product() && $single_product_layout != 'right-sidebar' && is_product() && $single_product_layout != 'left-sidebar') {
+		remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+		add_action('woocommerce_before_main_content', 'nectar_shop_wrapper_start', 10);
+		add_action('woocommerce_after_main_content', 'nectar_shop_wrapper_end', 10);
+	}
+
+	//no sidebar shop
+	if(is_shop() || is_product_category() || is_product_tag()) {
+		if($main_shop_layout != 'right-sidebar' && $main_shop_layout != 'left-sidebar'  && $main_shop_layout != 'fullwidth') {
+			remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+			add_action('woocommerce_before_main_content', 'nectar_shop_wrapper_start', 10);
+			add_action('woocommerce_after_main_content', 'nectar_shop_wrapper_end', 10);
+		}
+
+	} 
+
+
+	//using sidebar
+	if(is_shop() || is_product_category() || is_product_tag() || is_product()) {
+
+		$nectar_shop_layout = (is_product()) ? $single_product_layout : $main_shop_layout;
+
+		if($nectar_shop_layout == 'right-sidebar') {
+
+			remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+			
+			add_action('woocommerce_before_main_content', 'nectar_shop_wrapper_start_sidebar_right', 10);
+			add_action('woocommerce_after_main_content', 'nectar_shop_wrapper_end_sidebar_right', 10);
+
+			add_filter('loop_shop_columns', 'nectar_shop_loop_columns');
+
+		} else if($nectar_shop_layout == 'left-sidebar') {
+
+			remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+			
+			add_action('woocommerce_before_main_content', 'nectar_shop_wrapper_start_sidebar_left', 10);
+			add_action('woocommerce_after_main_content', 'nectar_shop_wrapper_end_sidebar_left', 10);
+
+			add_filter('loop_shop_columns', 'nectar_shop_loop_columns');
+		}
+
+		else if($nectar_shop_layout == 'fullwidth') {
+
+			remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+			
+			add_action('woocommerce_before_main_content', 'nectar_shop_wrapper_start_fullwidth', 10);
+			add_action('woocommerce_after_main_content', 'nectar_shop_wrapper_end_fullwidth', 10);
+
+		}
+	}
+
+
+
+}
+
+
+
+
+
+/*
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
@@ -4570,11 +4904,29 @@ function salient_theme_wrapper_start() {
 
 function salient_theme_wrapper_end() {
     echo '</div>';
-}
+}*/
 
 add_theme_support( 'woocommerce' );
 
+//remove parentheses in counts
+function nectar_remove_categories_count ($variable) {
+   $variable = str_replace('(', '<span class="post_count"> ', $variable);
+   $variable = str_replace(')', ' </span>', $variable);
+   return $variable;
+}
+
+if($woocommerce) {
+	add_filter('wp_list_categories','nectar_remove_categories_count');
+	add_filter('woocommerce_layered_nav_count','nectar_remove_categories_count');
+}
  
+add_filter( 'woocommerce_pagination_args' , 'nectar_override_pagination_args' );
+function nectar_override_pagination_args( $args ) {
+	$args['prev_text'] = __( 'Previous', NECTAR_THEME_NAME );
+	$args['next_text'] = __( 'Next', NECTAR_THEME_NAME );
+	return $args;
+}
+
 
 add_filter('add_to_cart_fragments', 'add_to_cart_fragment');
 
@@ -4663,8 +5015,13 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 }
 
 
-//chnge how many products are displayed per page	
-add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 12;' ), 20 );
+//change how many products are displayed per page	
+global $options;
+
+$product_hover_alt_image = ( !empty($options['product_hover_alt_image']) ) ? $options['product_hover_alt_image'] : 'off';
+$nectar_woo_products_per_page = ( !empty($options['woo-products-per-page']) ) ? $options['woo-products-per-page'] : '12';
+
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return '.$nectar_woo_products_per_page.';' ), 20 );
 
 //change the position of add to cart
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
@@ -4674,21 +5031,71 @@ remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_
 $product_style = (!empty($options['product_style'])) ? $options['product_style'] : 'classic';
 if( $product_style == 'classic'){
 	add_action('woocommerce_before_shop_loop_item_title', 'product_thumbnail_with_cart', 10 );
-} else {
+} else if($product_style == 'text_on_hover') {
 	add_action('woocommerce_before_shop_loop_item_title', 'product_thumbnail_with_cart_alt', 10 );
 
 	remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 	remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 	add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 5 );
 	add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 10 );
+} else {
+	add_action('woocommerce_before_shop_loop_item_title', 'product_thumbnail_material', 10 );
+	remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 }
 
-function product_thumbnail_with_cart() { ?>
+function product_thumbnail_with_cart() { 
+	global $product;
+	global $product_hover_alt_image; ?>
 	
    <div class="product-wrap">
 
-	    <a href="<?php the_permalink(); ?>">	<?php echo  woocommerce_get_product_thumbnail(); ?> </a>
+	    <a href="<?php the_permalink(); ?>">	<?php 
+
+	    $product_second_image = null;
+	    if($product_hover_alt_image == '1') {
+
+	    	$product_attach_ids = $product->get_gallery_attachment_ids(); 
+
+			if ( isset($product_attach_ids[0]) ) 
+				$product_second_image = wp_get_attachment_image($product_attach_ids[0], 'shop_catalog', false, array( 'class' => 'hover-gallery-image' ));
+	    } 
+
+	    echo  woocommerce_get_product_thumbnail() . $product_second_image; ?> </a>
 	   	<?php woocommerce_template_loop_add_to_cart(); ?>
+   	</div>
+<?php 
+}
+
+function product_thumbnail_material() { 
+
+   global $product;
+   global $product_hover_alt_image; ?>
+	
+   <div class="product-wrap">
+	    <?php 
+
+	    $product_second_image = null;
+	    if($product_hover_alt_image == '1') {
+
+	    	$product_attach_ids = $product->get_gallery_attachment_ids(); 
+
+			if ( isset($product_attach_ids[0]) ) 
+				$product_second_image = wp_get_attachment_image($product_attach_ids[0], 'shop_catalog', false, array( 'class' => 'hover-gallery-image' ));
+	    } 
+
+		echo '<a href="'.get_permalink().'">';
+	    echo  woocommerce_get_product_thumbnail() . $product_second_image;
+	    echo '</a>';
+	    echo '<div class="product-meta">'; 
+	    echo '<a href="'.get_permalink().'">';
+	    do_action( 'woocommerce_shop_loop_item_title' );
+	    echo '</a>';
+ 		do_action( 'woocommerce_after_shop_loop_item_title' ); 
+
+ 		echo '<div class="product-add-to-cart">'; 
+	  	  woocommerce_template_loop_add_to_cart(); 
+	    echo '</div></div>'; ?>
    	</div>
 <?php 
 }
@@ -4700,7 +5107,18 @@ function product_thumbnail_with_cart_alt() { ?>
    <div class="product-wrap">
 	   	<?php 
 	   	global $product;
-	   	echo  woocommerce_get_product_thumbnail(); ?>
+	   	global $product_hover_alt_image; 
+
+	   	$product_second_image = null;
+	    if($product_hover_alt_image == '1') {
+
+	    	$product_attach_ids = $product->get_gallery_attachment_ids(); 
+
+			if ( isset($product_attach_ids[0]) ) 
+				$product_second_image = wp_get_attachment_image($product_attach_ids[0], 'shop_catalog', false, array( 'class' => 'hover-gallery-image' ));
+	    } 
+
+	   	echo  woocommerce_get_product_thumbnail() . $product_second_image; ?>
 
 	   	<div class="bg-overlay"></div>
 	   	<a href="<?php the_permalink(); ?>" class="link-overlay"></a>
@@ -4769,26 +5187,26 @@ function review_quickview(){
 					
 					//facebook
 					if(!empty($options['woo-facebook-sharing']) && $options['woo-facebook-sharing'] == 1) {
-						echo "<a class='facebook-share nectar-sharing' href='#' title='Share this'> <i class='icon-facebook'></i> <span class='count'></span></a>";
+						echo "<a class='facebook-share nectar-sharing' href='#' title='Share this'> <i class='fa fa-facebook'></i> <span class='count'></span></a>";
 					}
 					//twitter
 					if(!empty($options['woo-twitter-sharing']) && $options['woo-twitter-sharing'] == 1) {
-						echo "<a class='twitter-share nectar-sharing' href='#' title='Tweet this'> <i class='icon-twitter'></i> <span class='count'></span></a>";
+						echo "<a class='twitter-share nectar-sharing' href='#' title='Tweet this'> <i class='fa fa-twitter'></i> <span class='count'></span></a>";
 					}
 
 					//google plus
 					if(!empty($options['woo-google-plus-sharing']) && $options['woo-google-plus-sharing'] == 1) {
-						echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-google-plus'></i> <span class='count'> ".GetGooglePlusShares(get_permalink($post->ID))." </span></a>";
+						echo "<a class='google-plus-share nectar-sharing-alt' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-google-plus'></i> <span class='count'>0</span></a>";
 					}
 					
 					//linkedIn
 					if(!empty($options['woo-linkedin-sharing']) && $options['woo-linkedin-sharing'] == 1) {
-						echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='icon-linkedin'></i> <span class='count'> </span></a>";
+						echo "<a class='linkedin-share nectar-sharing' href='#' title='".__('Share this', NECTAR_THEME_NAME)."'> <i class='fa fa-linkedin'></i> <span class='count'> </span></a>";
 					}
 
 					//pinterest
 					if(!empty($options['woo-pinterest-sharing']) && $options['woo-pinterest-sharing'] == 1) {
-						echo "<a class='pinterest-share nectar-sharing' href='#' title='Pin this'> <i class='icon-pinterest'></i> <span class='count'></span></a>";
+						echo "<a class='pinterest-share nectar-sharing' href='#' title='Pin this'> <i class='fa fa-pinterest'></i> <span class='count'></span></a>";
 					}
 
 
@@ -4868,6 +5286,7 @@ $using_jetpack_publicize = ( class_exists( 'Jetpack' ) && in_array( 'publicize',
 if ( !defined('WPSEO_VERSION') && !class_exists('NY_OG_Admin') && !class_exists('Wpsso') && $using_jetpack_publicize == false) {
 	add_action( 'wp_head', 'add_opengraph', 5 );
 }
+
 
 
 ?>

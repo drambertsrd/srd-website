@@ -1,6 +1,6 @@
 <?php 
 
-extract(shortcode_atts(array("size" => 'small', "url" => '#', 'button_style' => '', 'button_color_2' => '', 'button_color' => '', 'color_override' => '', 'hover_color_override' => '', 'hover_text_color_override' => '#fff', "text" => 'Button Text', 'icon_family' => '', 'icon_fontawesome' => '', 'icon_linecons' => '', 'icon_steadysets' => '', 'open_new_tab' => '0', 
+extract(shortcode_atts(array("size" => 'small', "url" => '#', 'button_style' => '', 'button_color_2' => '', 'button_color' => '', 'color_override' => '', 'hover_color_override' => '', 'hover_text_color_override' => '#fff', "text" => 'Button Text', 'icon_family' => '', 'icon_fontawesome' => '', 'icon_linecons' => '', 'icon_iconsmind' => '', 'icon_steadysets' => '', 'open_new_tab' => '0', 
 	'margin_top' => '','margin_right' => '','margin_bottom' => '', 'margin_left' => ''), $atts));
 
 
@@ -16,6 +16,9 @@ $target = ($open_new_tab == 'true') ? 'target="_blank"' : null;
 			break;
 		case 'linecons':
 			$icon = $icon_linecons;
+			break;
+		case 'iconsmind':
+			$icon = $icon_iconsmind;
 			break;
 		default:
 			$icon = '';
@@ -84,7 +87,7 @@ $target = ($open_new_tab == 'true') ? 'target="_blank"' : null;
 	$hover_text_color_override = (!empty($hover_text_color_override)) ? ' data-hover-text-color-override="'. $hover_text_color_override.'"' :  null;	
 	$button_close_tag = null;
 
-	if($color == 'accent-color tilt' || $color == 'extra-color-1 tilt' || $color == 'extra-color-2 tilt' || $color == 'extra-color-3 tilt') $button_close_tag = '</div></div>';
+	if(strtolower($color) == 'accent-color tilt' || strtolower($color) == 'extra-color-1 tilt' || strtolower($color) == 'extra-color-2 tilt' || strtolower($color) == 'extra-color-3 tilt') $button_close_tag = '</div></div>';
 
 	if($button_style != 'see-through-3d') {
 		if($color == 'extra-color-gradient-1' || $color == 'extra-color-gradient-2')
@@ -102,17 +105,17 @@ $target = ($open_new_tab == 'true') ? 'target="_blank"' : null;
 		if($size =='extra_jumbo') $border = 20;
 		echo '
 		<div class="nectar-3d-transparent-button" style="'.$margins.'" data-size="'.$size.'">
-		     <a href="'.$url.'"><span class="hidden-text">'.$text.'</span>
+		     <a href="'.$url.'" '. $target.'><span class="hidden-text">'.$text.'</span>
 			<div class="inner-wrap">
 				<div class="front-3d">
 					<svg>
 						<defs>
 							<mask>
 								<rect width="100%" height="100%" fill="#ffffff"></rect>
-								<text class="mask-text button-text" fill="#000000" width="100%" text-anchor="middle">'.$text.'</text>
+								<text class="mask-text button-text" fill="#000000" text-anchor="middle">'.$text.'</text>
 							</mask>
 						</defs>
-						<rect id="" fill="'.$color.'" width="100%" height="100%" ></rect>
+						<rect fill="'.$color.'" width="100%" height="100%" ></rect>
 					</svg>
 				</div>
 				<div class="back-3d">

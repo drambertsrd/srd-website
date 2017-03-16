@@ -16,6 +16,10 @@
 .wpb-layout-element-button .icon-wpb-contactform7, .wpb-layout-element-button .icon-wpb-vc_gravityform { background-image: url(img/contact-form-7.png)!important; background-position: 0px 0px!important;}
 .wpb_contact-form-7 .wpb_element_wrapper { background-image: url(img/contact-form-7.png)!important;}
 
+/* icons */
+.wpb-layout-element-button .icon-wpb-icons { background-image: url(img/icons2.png)!important; background-position: 0px 0px!important;}
+.wpb_nectar_icon  .wpb_element_wrapper { background-image: url(img/icons2.png)!important;}
+
 /* Rev Slider */
 .wpb-layout-element-button .icon-wpb-revslider { background-image: url(img/rev-slider.png)!important; background-position: 0px 0px!important;}
 .wpb_rev_slider_vc .wpb_element_wrapper { background-image: url(img/rev-slider.png)!important;}
@@ -844,14 +848,17 @@ div[data-vc-shortcode="nectar_cascading_images"] .image_4_offset_y_sign {
     border-right: 0;
 }
 
-div[data-vc-shortcode="nectar_btn"] .col-md-2, div[data-vc-shortcode="carousel"] .col-md-2, div[data-vc-shortcode="nectar_gradient_text"] .col-md-2 {
+div[data-vc-shortcode="nectar_icon"] .col-md-2, div[data-vc-shortcode="nectar_btn"] .col-md-2, div[data-vc-shortcode="carousel"] .col-md-2, div[data-vc-shortcode="nectar_gradient_text"] .col-md-2 {
     padding: 15px 0;
     width: 15%;
     margin-right: 15px;
 }
-div[data-vc-shortcode="nectar_btn"] [data-vc-shortcode-param-name="margin_top"], div[data-vc-shortcode="nectar_gradient_text"] [data-vc-shortcode-param-name="margin_top"], div[data-vc-shortcode="carousel"] [data-vc-shortcode-param-name="desktop_cols"] {
+div[data-vc-shortcode="nectar_icon"] [data-vc-shortcode-param-name="margin_top"], div[data-vc-shortcode="nectar_btn"] [data-vc-shortcode-param-name="margin_top"], div[data-vc-shortcode="nectar_gradient_text"] [data-vc-shortcode-param-name="margin_top"], div[data-vc-shortcode="carousel"] [data-vc-shortcode-param-name="desktop_cols"] {
     margin-left: 15px;
 }
+div[data-vc-shortcode="nectar_icon"] [data-vc-shortcode-param-name="margin_right"], 
+div[data-vc-shortcode="nectar_icon"] [data-vc-shortcode-param-name="margin_bottom"],
+div[data-vc-shortcode="nectar_icon"] [data-vc-shortcode-param-name="margin_left"],
 div[data-vc-shortcode="nectar_btn"] [data-vc-shortcode-param-name="margin_right"], 
 div[data-vc-shortcode="nectar_btn"] [data-vc-shortcode-param-name="margin_bottom"],
 div[data-vc-shortcode="nectar_btn"] [data-vc-shortcode-param-name="margin_left"],
@@ -863,7 +870,7 @@ div[data-vc-shortcode="carousel"] [data-vc-shortcode-param-name="tablet_cols"],
 div[data-vc-shortcode="carousel"] [data-vc-shortcode-param-name="mobile_cols"] {
     margin-top: 18px;
 }
-div[data-vc-shortcode="nectar_btn"] .col-md-2 span, div[data-vc-shortcode="nectar_gradient_text"] .col-md-2 span, div[data-vc-shortcode="carousel"] .col-md-2 span {
+div[data-vc-shortcode="nectar_icon"] .col-md-2 span, div[data-vc-shortcode="nectar_btn"] .col-md-2 span, div[data-vc-shortcode="nectar_gradient_text"] .col-md-2 span, div[data-vc-shortcode="carousel"] .col-md-2 span {
     color: #999;
     font-weight: normal;
     display: block;

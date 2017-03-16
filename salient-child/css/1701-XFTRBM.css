@@ -1,0 +1,202 @@
+/*
+        This font software is the property of Commercial Type.
+
+        You may not modify the font software, use it on another website, or install it on a computer.
+
+        License information is available at http://commercialtype.com/eula
+        For more information please visit Commercial Type at http://commercialtype.com or email us at info[at]commercialtype.com
+
+        Copyright (C) 2017 Schwartzco Inc.
+        License: 1701-XFTRBM     
+*/
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-BlackItalic-Web.eot');
+  src: url('Robinson-BlackItalic-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-BlackItalic-Web.woff2') format('woff2'),
+       url('Robinson-BlackItalic-Web.woff') format('woff');
+  font-weight:  900;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+.Robinson-BlackItalic-Web {
+  font-family: 'Robinson Web';
+  font-weight:  900;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-Black-Web.eot');
+  src: url('Robinson-Black-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-Black-Web.woff2') format('woff2'),
+       url('Robinson-Black-Web.woff') format('woff');
+  font-weight:  900;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Robinson-Black-Web {
+  font-family: 'Robinson Web';
+  font-weight:  900;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-BoldItalic-Web.eot');
+  src: url('Robinson-BoldItalic-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-BoldItalic-Web.woff2') format('woff2'),
+       url('Robinson-BoldItalic-Web.woff') format('woff');
+  font-weight:  700;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+.Robinson-BoldItalic-Web {
+  font-family: 'Robinson Web';
+  font-weight:  700;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-Bold-Web.eot');
+  src: url('Robinson-Bold-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-Bold-Web.woff2') format('woff2'),
+       url('Robinson-Bold-Web.woff') format('woff');
+  font-weight:  700;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Robinson-Bold-Web {
+  font-family: 'Robinson Web';
+  font-weight:  700;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-MediumItalic-Web.eot');
+  src: url('Robinson-MediumItalic-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-MediumItalic-Web.woff2') format('woff2'),
+       url('Robinson-MediumItalic-Web.woff') format('woff');
+  font-weight:  500;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+.Robinson-MediumItalic-Web {
+  font-family: 'Robinson Web';
+  font-weight:  500;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-Medium-Web.eot');
+  src: url('Robinson-Medium-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-Medium-Web.woff2') format('woff2'),
+       url('Robinson-Medium-Web.woff') format('woff');
+  font-weight:  500;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Robinson-Medium-Web {
+  font-family: 'Robinson Web';
+  font-weight:  500;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-RegularItalic-Web.eot');
+  src: url('Robinson-RegularItalic-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-RegularItalic-Web.woff2') format('woff2'),
+       url('Robinson-RegularItalic-Web.woff') format('woff');
+  font-weight:  400;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+.Robinson-RegularItalic-Web {
+  font-family: 'Robinson Web';
+  font-weight:  400;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-Regular-Web.eot');
+  src: url('Robinson-Regular-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-Regular-Web.woff2') format('woff2'),
+       url('Robinson-Regular-Web.woff') format('woff');
+  font-weight:  400;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Robinson-Regular-Web {
+  font-family: 'Robinson Web';
+  font-weight:  400;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-LightItalic-Web.eot');
+  src: url('Robinson-LightItalic-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-LightItalic-Web.woff2') format('woff2'),
+       url('Robinson-LightItalic-Web.woff') format('woff');
+  font-weight:  300;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+.Robinson-LightItalic-Web {
+  font-family: 'Robinson Web';
+  font-weight:  300;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'Robinson Web';
+  src: url('Robinson-Light-Web.eot');
+  src: url('Robinson-Light-Web.eot?#iefix') format('embedded-opentype'),
+       url('Robinson-Light-Web.woff2') format('woff2'),
+       url('Robinson-Light-Web.woff') format('woff');
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Robinson-Light-Web {
+  font-family: 'Robinson Web';
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}
+

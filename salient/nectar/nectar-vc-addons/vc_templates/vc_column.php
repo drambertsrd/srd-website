@@ -59,6 +59,11 @@ if(!empty($background_image)) {
 if(!empty($font_color)) $style .= ' color: '.$font_color.';';
 
 if(!empty($top_margin)) {
+    //class for neg margin to adjust z-index
+    if(strpos($top_margin,'-') !== false) {
+        $el_class .= ' neg-marg';
+    }
+    //actual margin proc
     if(strpos($top_margin,'%') !== false) {
         $style .= 'margin-top: '. $top_margin .'; ';
     } else {

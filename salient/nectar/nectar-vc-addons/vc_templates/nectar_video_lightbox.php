@@ -20,11 +20,11 @@ if($link_style == 'play_button_2') {
         	}  
 		}
 
-	echo '<div class="nectar-video-box" data-color="'.strtolower($nectar_play_button_color).'" data-shadow="'.$box_shadow.'"><a href="'.$video_url.'" rel="prettyPhoto" class="full-link"></a>'. $image;
+	echo '<div class="nectar-video-box" data-color="'.strtolower($nectar_play_button_color).'" data-shadow="'.$box_shadow.'"><a href="'.$video_url.'" class="full-link pp"></a>'. $image;
 }
 
 
-echo '<a href="'.$video_url.'" '.$extra_attrs.' data-color="'.strtolower($the_color).'" class="'.$link_style.' large nectar_video_lightbox" rel="prettyPhoto">'.$the_link_text .'</a>';
+echo '<a href="'.$video_url.'" '.$extra_attrs.' data-color="'.strtolower($the_color).'" class="'.$link_style.' large nectar_video_lightbox pp">'.$the_link_text .'</a>';
 
 if($link_style == 'play_button_2') echo '</div>';
 

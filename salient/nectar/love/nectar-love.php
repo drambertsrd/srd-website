@@ -119,9 +119,10 @@ class NectarLove {
 		$post_header_style = (!empty($options['blog_header_type'])) ? $options['blog_header_type'] : 'default'; 
 		
 		$masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry_type'] : 'classic';
-		$heart_icon = (!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') ? '<div class="heart-wrap"><i class="icon-salient-heart-2"></i> <i class="icon-salient-heart loved"></i></div>' : '<i class="icon-salient-heart"></i>' ;
-		if(!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend' && isset($_COOKIE['nectar_love_'. $post->ID]) && $masonry_type != 'classic_enhanced') $heart_icon = '<i class="icon-salient-heart"></i>';
-		if( isset($_COOKIE['nectar_love_'. $post->ID]) && $masonry_type == 'classic_enhanced') $heart_icon = '<i class="icon-salient-heart-2 loved"></i>';
+		$heart_icon = (!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') ? '<div class="heart-wrap"><i class="icon-salient-heart-2"></i></div>' : '<i class="icon-salient-heart-2"></i>' ;
+		//if(!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend' && isset($_COOKIE['nectar_love_'. $post->ID]) && $masonry_type != 'classic_enhanced') $heart_icon = '<i class="icon-salient-heart"></i>';
+		//if( isset($_COOKIE['nectar_love_'. $post->ID]) && $masonry_type == 'classic_enhanced') 
+		if( isset($_COOKIE['nectar_love_'. $post->ID])) $heart_icon = '<i class="icon-salient-heart-2 loved"></i>';
 		
 		if( ($post->post_type == 'post' && is_single()) && $post_header_style == 'default_minimal') {
 			return '<a href="#" class="'. $class .'" id="nectar-love-'. $post->ID .'" title="'. $title .'"> '.$heart_icon . __('Love',NECTAR_THEME_NAME) . '<span class="total_loves">' . $output . '</span></a>';

@@ -18,6 +18,9 @@ extract(shortcode_atts(array(
     'flexible_slider_height' => '',
     'hide_arrow_navigation' => '',
     'bullet_navigation' => '',
+    'masonry_style' => '',
+    'item_spacing' => 'default',
+    'load_in_animation' => 'none',
     'bullet_navigation_style' => 'see_through',
     'layout' => '',
     'images' => '',
@@ -38,16 +41,30 @@ $el_class = $this->getExtraClass($el_class);
 if(!function_exists('wp_get_attachment')) {
 	function wp_get_attachment( $attachment_id ) {
 	
-		$attachment = get_post( $attachment_id );
-		return array(
-			'alt' => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
-			'caption' => $attachment->post_excerpt,
-			'description' => $attachment->post_content,
-			'href' => get_permalink( $attachment->ID ),
-			'src' => $attachment->guid,
-			'title' => $attachment->post_title,
-			'image_url' => get_post_meta( $attachment->ID, 'nectar_image_gal_url', true ),
-		);
+		if(is_numeric($attachment_id) && $attachment_id > 0) {
+			$attachment = get_post( $attachment_id );
+			return array(
+				'alt' => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+				'caption' => $attachment->post_excerpt,
+				'description' => $attachment->post_content,
+				'href' => get_permalink( $attachment->ID ),
+				'src' => $attachment->guid,
+				'title' => $attachment->post_title,
+				'masonry_image_sizing' => get_post_meta( $attachment->ID, 'nectar_image_gal_masonry_sizing', true ),
+				'image_url' => get_post_meta( $attachment->ID, 'nectar_image_gal_url', true ),
+			);
+		} else {
+			return array(
+				'alt' => '',
+				'caption' => '',
+				'description' => '',
+				'href' => '',
+				'src' => '',
+				'title' => '',
+				'masonry_image_sizing' => '',
+				'image_url' => ''
+			);
+		}
 	}
 }
 
@@ -153,7 +170,11 @@ if ( $type == 'flexslider_style' ) {
 		
 
 	$constrain_col_class = (!empty($constrain_max_cols) && $constrain_max_cols == 'true') ? ' constrain-max-cols' : null ;
+	$masonry_layout = ($masonry_style == 'true') ? 'true' : 'false';
+	global $options;
+	$masonry_sizing_type = (!empty($options['portfolio_masonry_grid_sizing']) && $options['portfolio_masonry_grid_sizing'] == 'photography') ? 'photography' : 'default';
 
+	
 	ob_start(); ?>
 
 
@@ -161,7 +182,7 @@ if ( $type == 'flexslider_style' ) {
 			
 			<span class="portfolio-loading"></span>
 
-			<div id="portfolio" class="row portfolio-items no-masonry <?php echo $constrain_col_class; ?>" data-starting-filter="" data-categories-to-show="" data-col-num="<?php echo $cols; ?>">
+			<div class="row portfolio-items <?php if($masonry_layout == 'true') echo 'masonry-items'; else { echo 'no-masonry'; } ?> <?php echo $constrain_col_class; ?>" data-starting-filter="" data-gutter="<?php echo $item_spacing; ?>" data-masonry-type="<?php echo $masonry_sizing_type; ?>" data-ps="<?php echo $gallery_style; ?>" data-categories-to-show="" data-col-num="<?php echo $cols; ?>">
 				
 			
 		
@@ -173,17 +194,13 @@ if ( $type == 'flexslider_style' ) {
 	
 	
 	
-	ob_start(); ?>
-	
-	<div class="col <?php echo $span_num; ?> element" data-project-cat="" data-default-color="true" data-title-color="" data-subtitle-color="">
-	
-	<?php 
+	ob_start(); 
 			
 	$el_start = ob_get_contents();
 	
 	ob_end_clean();
 	
-	$el_end = '</div>';
+	$el_end = '';
 
     
     $slides_wrap_end = '</div></div>';
@@ -209,7 +226,7 @@ if ( $type == 'flexslider_style' ) {
 
 if ( $images == '' ) $images = '-1,-2,-3, -4';
 
-$pretty_rel_random = ' rel="prettyPhoto[rel-'.rand().']"'; //rel-'.rand();
+$pretty_rel_random = ''; //rel-'.rand();
 
 if ( $onclick == 'custom_link' ) { 
 	$custom_links = vc_value_from_safe( $custom_links ); 
@@ -266,7 +283,8 @@ foreach ( $images as $attach_id ) {
 
     $thumbnail = $post_thumbnail['thumbnail'];
 
- 	if($img_size == 'full') $post_thumbnail['p_img_large'][0] = $post_thumbnail['p_img_fullsize'];
+ 	//if($img_size == 'full') 
+ 		$post_thumbnail['p_img_large'][0] = $post_thumbnail['p_img_fullsize'];
  	
     $p_img_large = $post_thumbnail['p_img_large'];
     $link_start = $link_end = '';
@@ -371,11 +389,42 @@ foreach ( $images as $attach_id ) {
 						
 						<?php //project style 1
 							
+							$attachment_meta = wp_get_attachment($attach_id);
+							$masonry_item_sizing = null;
+
+							if($masonry_layout == 'true') {
+								if(!empty($attachment_meta['masonry_image_sizing'])) {
+									$masonry_item_sizing = $attachment_meta['masonry_image_sizing'];
+								} else {
+									$masonry_item_sizing = 'regular';
+								}
+
+							
+							} ?>
+
+							<div class="col <?php echo $span_num .' '. $masonry_item_sizing; ?> element" data-project-cat="" data-default-color="true" data-title-color="" data-subtitle-color="">
+
+							<div class="inner-wrap animated" data-animation="<?php echo $load_in_animation; ?>">
+
+							<?php 
+
+							//photography masonry sizing
+							if($masonry_layout == 'true') {
+								if($masonry_sizing_type == 'photography' && !empty($masonry_item_sizing)) 
+									$masonry_item_sizing = $masonry_item_sizing.'_photography';
+							}
 
 							switch ( $source ) {
 								case 'media_library':
 									if ($attach_id > 0) {
-								        $post_thumbnail = wpb_getImageBySize(array( 'attach_id' => (int) $attach_id, 'thumb_size' => $img_size ));
+
+										if($masonry_layout == 'true') {
+											$post_thumbnail = array();
+								      	 	$post_thumbnail['thumbnail'] = wp_get_attachment_image($attach_id, $masonry_item_sizing, array('title' => ''));
+								        	$post_thumbnail['p_img_large'][0] = '';
+								        }
+										else 
+								        	$post_thumbnail = wpb_getImageBySize(array( 'attach_id' => (int) $attach_id, 'thumb_size' => $img_size ));
 								    }
 								    else {
 								        $post_thumbnail = array();
@@ -415,7 +464,7 @@ foreach ( $images as $attach_id ) {
 											} else {
 												echo '<div class="vert-center"><a ';
 												 if(!empty($attachment_meta['description'])) echo 'title="'.$attachment_meta['description'].'"';
-												echo 'href="'.$p_img_large[0].'"'.$pretty_rel_random.' class="default-link">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
+												echo ' href="'.$p_img_large[0].'" class="default-link pretty_photo">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
 											} ?>
 											</div><!--/vert-center-->
 										<?php } ?>
@@ -457,14 +506,16 @@ foreach ( $images as $attach_id ) {
 									   		 <a <?php echo 'href="'.$attachment_meta['image_url'].'"'; ?>></a>
 								   		<?php } else { ?>
 								   			 <a <?php echo 'href="'.$p_img_large[0].'"';
-								   			  if(!empty($attachment_meta['description'])) echo 'title="'.$attachment_meta['description'].'"';
-								   			 echo ' '.$pretty_rel_random; ?>></a>
+								   			  if(!empty($attachment_meta['description'])) echo ' title="'.$attachment_meta['description'].'"';
+								   			 echo ' class="pretty_photo"'; ?>></a>
 								   		<?php } ?>
 			
 										<div class="vert-center">
 											<?php if($display_title_caption == 'true') { ?> 
 												
-												<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php if(!empty($attachment_meta['title'])) { ?>
+													<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php } ?>
 												<p><?php echo $attachment_meta['caption']; ?></p>
 												
 											<?php } ?>
@@ -500,7 +551,9 @@ foreach ( $images as $attach_id ) {
 										<div class="vert-center">
 											<?php if($display_title_caption == 'true') { ?> 
 												
-												<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php if(!empty($attachment_meta['title'])) { ?>
+													<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php } ?>
 												<p><?php echo $attachment_meta['caption']; ?></p>
 												
 											<?php } ?>
@@ -512,8 +565,8 @@ foreach ( $images as $attach_id ) {
 									   		 <a <?php echo 'href="'.$attachment_meta['image_url'].'"'; ?>></a>
 								   		<?php } else { ?>
 								   			 <a <?php echo 'href="'.$p_img_large[0].'"';
-								   			  if(!empty($attachment_meta['description'])) echo 'title="'.$attachment_meta['description'].'"';
-								   			 echo ' '.$pretty_rel_random; ?>></a>
+								   			  if(!empty($attachment_meta['description'])) echo ' title="'.$attachment_meta['description'].'"';
+								   			  echo ' class="pretty_photo"'; ?>></a>
 								   		<?php } ?>
 										
 									</div>
@@ -544,14 +597,16 @@ foreach ( $images as $attach_id ) {
 									   		 <a <?php echo 'href="'.$attachment_meta['image_url'].'"'; ?>></a>
 								   		<?php } else { ?>
 								   			 <a <?php echo 'href="'.$p_img_large[0].'"';
-								   			  if(!empty($attachment_meta['description'])) echo 'title="'.$attachment_meta['description'].'"';
-								   			 echo ' '.$pretty_rel_random; ?>></a>
+								   			  if(!empty($attachment_meta['description'])) echo ' title="'.$attachment_meta['description'].'"';
+								   			  echo ' class="pretty_photo"'; ?>></a>
 								   		<?php } ?>
 
 										<div class="bottom-meta">
 											<?php if($display_title_caption == 'true') { ?> 
 												
-											<h3><?php echo $attachment_meta['title']; ?></h3> 
+											<?php if(!empty($attachment_meta['title'])) { ?>
+												<h3><?php echo $attachment_meta['title']; ?></h3> 
+											<?php } ?>
 											<p><?php echo $attachment_meta['caption']; ?></p>	 
 											
 											<?php } ?>
@@ -580,7 +635,9 @@ foreach ( $images as $attach_id ) {
 										<?php if($attach_id > 0) { ?>
 											<?php if($display_title_caption == 'true') { ?> 
 												
-												<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php if(!empty($attachment_meta['title'])) { ?>
+													<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php } ?> 
 												<p><?php echo $attachment_meta['caption']; ?></p>
 												
 											<?php } ?>
@@ -595,8 +652,8 @@ foreach ( $images as $attach_id ) {
 									   		 <a <?php echo 'href="'.$attachment_meta['image_url'].'"'; ?>></a>
 								   		<?php } else { ?>
 								   			 <a <?php echo 'href="'.$p_img_large[0].'"';
-								   			  if(!empty($attachment_meta['description'])) echo 'title="'.$attachment_meta['description'].'"';
-								   			 echo ' '.$pretty_rel_random; ?>></a>
+								   			  if(!empty($attachment_meta['description'])) echo ' title="'.$attachment_meta['description'].'"';
+								   			  echo ' class="pretty_photo"'; ?>></a>
 								   		<?php } ?>
 
 								   	<?php } ?>
@@ -606,7 +663,52 @@ foreach ( $images as $attach_id ) {
 							
 						<?php } //project style 5
 
+						//project style 2
+						else if($gallery_style == '7') { ?>
+							
+							<div class="work-item style-2">
+								
+								<?php
+								echo $post_thumbnail['thumbnail']; ?>
 			
+								<div class="work-info-bg"></div>
+								<div class="work-info">
+								
+									
+									<?php 
+									if($attach_id > 0) { 
+
+										$attachment_meta = wp_get_attachment($attach_id); 
+										if(!empty($attachment_meta['image_url'])) { ?>
+									   		 <a <?php echo 'href="'.$attachment_meta['image_url'].'"'; ?>></a>
+								   		<?php } else { ?>
+								   			 <a <?php echo 'href="'.$p_img_large[0].'"';
+								   			  if(!empty($attachment_meta['description'])) echo ' title="'.$attachment_meta['description'].'"';
+								   			 echo ' class="pretty_photo"'; ?>></a>
+								   		<?php } ?>
+			
+										<div class="vert-center">
+											<?php if($display_title_caption == 'true') { ?> 
+												
+												<?php if(!empty($attachment_meta['title'])) { ?>
+													<h3><?php echo $attachment_meta['title']; ?></h3> 
+												<?php } ?> 
+												<p><?php echo $attachment_meta['caption']; ?></p>
+												
+											<?php } ?>
+										</div><!--/vert-center-->
+
+									<?php } ?>
+									
+									
+								</div>
+							</div><!--work-item-->
+							
+						<?php } //project style 7 ?>
+
+						</div></div> <?php //project col / innerwrap ?>
+
+						<?php
 						$thumbnail = ob_get_contents();
 
 						ob_end_clean();
