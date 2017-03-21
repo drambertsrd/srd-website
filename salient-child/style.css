@@ -10,19 +10,57 @@ Version: 0.1
 
 
 @font-face {
-font-family: 'Robinson Web';
-src: url('Robinson-Light-Web.eot');
-src: url('Robinson-Light-Web.eot?#iefix') format('embedded-opentype'),
-url('Robinson-Light-Web.woff2') format('woff2'),
-url('Robinson-Light-Web.woff') format('woff');
-font-weight: 300;
-font-style: normal;
-font-stretch: normal;
+	font-family: 'Robinson Web';
+	src: url('Robinson-Light-Web.eot');
+	src: url('Robinson-Light-Web.eot?#iefix') format('embedded-opentype'),
+	url('Robinson-Light-Web.woff2') format('woff2'),
+	url('Robinson-Light-Web.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
 }
 
 .Robinson-Light-Web {
-font-family: 'Robinson Web';
-font-weight: 300;
-font-style: normal;
-font-stretch: normal;
+	font-family: 'Robinson Web';
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+}
+
+
+#srd-logo{
+	position: fixed;
+	height: 50px;
+	width: 30px;
+	top: 83px;
+	left: 50%;
+	z-index: 9999;
+}
+
+.small-nav #srd-logo{
+	top: 55px;
+}
+
+#top #logo{
+	position: relative;
+	top: 14px;
+}
+
+#top .menu-item{
+	position: relative;
+	top: 12px;
+}
+
+.small-nav #top #logo, .small-nav #top .menu-item{
+	top: 0;
+}
+
+@media screen and (max-width: 1000px) {
+	#srd-logo{
+		display: none;
+	}
+
+	#top #logo{
+		top: 0;
+	}
 }

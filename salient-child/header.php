@@ -284,9 +284,8 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
 			</div><!--/row-->
 			
 		</div><!--/container-->
-		
+
 	</header>
-	
 	
 	<?php if (!empty($options['enable-cart']) && $options['enable-cart'] == '1') { ?>
 		<?php
@@ -327,6 +326,12 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
    echo '<div class="ns-loading-cover"></div>';
    
    ?>		
+	
+
+	<!-- WSDS -->
+	<div id="srd-logo">
+		<?php get_template_part('partials/logo'); ?>
+	</div>	
 	
 
 </div><!--/header-outer-->
