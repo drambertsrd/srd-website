@@ -28,6 +28,10 @@ Version: 0.1
 }
 
 
+
+/* LOGO AND NAV */
+/* WSDS 3-21-17 */
+
 #srd-logo{
 	position: fixed;
 	height: 50px;
@@ -63,4 +67,20 @@ Version: 0.1
 	#top #logo{
 		top: 0;
 	}
+}
+
+
+/* OVERFLOW TEXT */
+/* WSDS 3-21-17 */
+
+.srd-overflow-column{
+	z-index: 20;
+}
+
+.srd-overflow{
+	width: calc(100vw - 60px) !important;
+}
+
+.srd-overflow h2{
+	
 }
