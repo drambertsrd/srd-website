@@ -11,10 +11,10 @@ Version: 0.1
 
 @font-face {
 	font-family: 'Robinson Web';
-	src: url('Robinson-Light-Web.eot');
-	src: url('Robinson-Light-Web.eot?#iefix') format('embedded-opentype'),
-	url('Robinson-Light-Web.woff2') format('woff2'),
-	url('Robinson-Light-Web.woff') format('woff');
+	src: url('./fonts/Robinson-Light-Web.eot');
+	src: url('./fonts/Robinson-Light-Web.eot?#iefix') format('embedded-opentype'),
+	url('./fonts/Robinson-Light-Web.woff2') format('woff2'),
+	url('./fonts/Robinson-Light-Web.woff') format('woff');
 	font-weight: 300;
 	font-style: normal;
 	font-stretch: normal;
@@ -36,7 +36,7 @@ Version: 0.1
 	position: fixed;
 	height: 50px;
 	width: 30px;
-	top: 83px;
+	top: calc(83px - 32px);
 	left: 50%;
 	z-index: 9999;
 }
@@ -65,7 +65,7 @@ Version: 0.1
 	}
 
 	#top #logo{
-		top: 0;
+		top: -20px !important;
 	}
 }
 
@@ -82,5 +82,5 @@ Version: 0.1
 }
 
 .srd-overflow h2{
-	
+
 }
